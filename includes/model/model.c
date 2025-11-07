@@ -5,3 +5,7 @@
 #include <unistd.h>
 #include <Windows.h>
 #include "model.h"
+
+int get_balance(){
+
+}

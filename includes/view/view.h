@@ -3,7 +3,7 @@
 
 void clear();
 
-void landingPage();
+void landing_page();
 
 int login();
 

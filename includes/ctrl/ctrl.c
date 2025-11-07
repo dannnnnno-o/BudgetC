@@ -6,3 +6,19 @@
 #include <Windows.h>
 #include "ctrl.h"
 
+int get_choice(char *mode){
+int choice = 0;    
+if(strcmp(mode, "landing_page") == 0){
+    while(1){
+    if(scanf("%d", &choice) != 1){
+    printf("Invalid input. Please choose from 1-5.\n");
+    }
+    if(choice <= 0 || choice > 5){
+        printf("Invalid input. Please choose from 1-5.\n");
+    }
+    getchar();
+    break;
+    }
+}
+return choice;
+}

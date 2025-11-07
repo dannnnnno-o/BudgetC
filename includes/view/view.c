@@ -11,8 +11,8 @@ void clear(){
     system("cls");
 }
 
-void landingPage(){
-printf("Welcome to budgetC!\n");
+void landing_page(){
+printf("Welcome to BudgetC!\n");
 printf("    This app serves as a mini-budgeting tool where users can keep track of their\n budget and expenses through the command line.\n\n");
 Sleep(1000);
 printf("Loading");

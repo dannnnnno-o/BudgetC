@@ -5,6 +5,7 @@
         "stdlib.h": "c",
         "string.h": "c",
         "time.h": "c",
-        "view.h": "c"
+        "view.h": "c",
+        "model.h": "c"
     }
 }
