@@ -6,6 +6,7 @@
         "string.h": "c",
         "time.h": "c",
         "view.h": "c",
-        "model.h": "c"
+        "model.h": "c",
+        "unistd.h": "c"
     }
 }

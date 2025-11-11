@@ -3,8 +3,9 @@
 
 void clear();
 
-void landing_page();
 
 int login();
+void landing_page();
+void menu();
 
 #endif

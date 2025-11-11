@@ -6,12 +6,14 @@
 #include <Windows.h>
 #include "view.h"
 #include "../ctrl/ctrl.h"
+#include "../model/model.h"
 
 void clear(){
     system("cls");
 }
 
 void landing_page(){
+
 printf("Welcome to BudgetC!\n");
 printf("    This app serves as a mini-budgeting tool where users can keep track of their\n budget and expenses through the command line.\n\n");
 Sleep(1000);
@@ -26,6 +28,7 @@ Sleep(500);
 }
 
 int login(){
+    clear();
     char p[5] = "0000";
     char pin[5];
     while(1){
@@ -48,3 +51,18 @@ int login(){
     
     }
 }
+
+
+void menu(){
+clear();
+int balance = get_balance();
+printf("Current Balance: %d\n\n", balance);
+printf("1. Add Balance\n");
+printf("2. Spend \n");
+printf("3. View Statistics\n");
+printf("4. Logout\n");
+printf("What would you like to do?: ");
+
+}
+
+
