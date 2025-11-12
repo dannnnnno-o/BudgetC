@@ -3,7 +3,11 @@
 
 void clear();
 
+/* loading pages */
+void load_add_bal();
 
+
+/* UI */
 int login();
 void landing_page();
 void menu();

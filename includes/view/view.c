@@ -12,6 +12,20 @@ void clear(){
     system("cls");
 }
 
+/* loading pages */
+void load_add_bal(){
+    printf("Adding balance");
+    Sleep(250);
+    printf(".");
+    Sleep(250);
+    printf(".");
+    Sleep(250);
+    printf(".");
+    Sleep(250);
+    printf("\n");
+}
+
+/* UI */
 void landing_page(){
 
 printf("Welcome to BudgetC!\n");
@@ -23,7 +37,7 @@ printf(".");
 Sleep(500);
 printf(".");
 Sleep(500);
-printf(".\n");
+printf(".");
 Sleep(500);
 }
 
@@ -54,7 +68,7 @@ int login(){
 
 
 void menu(){
-clear();
+
 int balance = get_balance();
 printf("Current Balance: %d\n\n", balance);
 printf("1. Add Balance\n");
