@@ -30,10 +30,8 @@ while(1){
     if(scanf("%d", &bal_buffer) == 1){
         while(1){
             printf("Would you like to add a comment? (y/n): ");
-            if(scanf(" %c", &comment) != 1){
-                break;
-            } 
-            else if(comment == 'n' || comment == 'N'){
+            scanf(" %c", &comment);
+            if(comment == 'n' || comment == 'N'){
                 int add_check = add_balance(current_balance, bal_buffer, "n", BAL_PATH);
                 if(add_check == 1){
                     exit(0);
@@ -43,6 +41,12 @@ while(1){
                 clear();
                 printf("Balance updated!\n");
                 break;
+            }
+
+            else{
+                flush();
+                printf("Invalid input. Please try again.\n\n");
+                continue;
             }
 /*             else if(comment == 'y' || comment == 'Y'){
                 char *comment_buf;
@@ -55,11 +59,11 @@ while(1){
                     printf("Balance updated!\n");
                     return_home();
                 } */
-                else{
+/*                 else{
                     printf("Process failed. Please try again.\n");
                     break;
-                }
-            break;
+                } */
+            // break;
             }
         }
     else{

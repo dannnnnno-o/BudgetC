@@ -6,6 +6,13 @@
 #include <Windows.h>
 #include "ctrl.h"
 
+
+void flush(){
+int flush_buffer;
+while ((flush_buffer = getchar()) != '\n' && flush_buffer != EOF);
+
+}
+
 int get_choice(char *mode){
 int choice = 0;    
 if(strcmp(mode, "landing_page") == 0){
