@@ -4,11 +4,15 @@
 #include <time.h>
 #include <unistd.h>
 #include <Windows.h>
+#include <stddef.h> // for size_t
+
 #include "includes/model/model.h"
 #include "includes/ctrl/ctrl.h"
 #include "includes/view/view.h"
 
 #define BAL_PATH "includes/db/balance.txt"
+#define ADD_HISTORY_PATH "includes/db/add_history.txt"
+#define COMMENT_SIZE 256
 
 int main(){
 landing_page();
@@ -21,64 +25,54 @@ menu();
 
 int choice = get_choice("landing_page");
 switch(choice){
-case 1: // add balance 
-int bal_buffer;
-char comment;
-while(1){
-    printf("Add Balance\n\n");
-    printf("How much would you like to add?: ");
-    if(scanf("%d", &bal_buffer) == 1){
-        while(1){
-            printf("Would you like to add a comment? (y/n): ");
-            scanf(" %c", &comment);
-            if(comment == 'n' || comment == 'N'){
-                int add_check = add_balance(current_balance, bal_buffer, "n", BAL_PATH);
-                if(add_check == 1){
-                    exit(0);
-                }
-                
-                load_add_bal();
-                clear();
-                printf("Balance updated!\n");
-                break;
-            }
+case 1: // update balance 
+int update; // what to update
+int bal_buffer; 
+int comment_choice;
+int add_check; // checked for add_balance();
+char *comment_buffer = malloc(COMMENT_SIZE); 
+int confirm_add;
+int confirm_update_balance;
 
-            else{
-                flush();
-                printf("Invalid input. Please try again.\n\n");
-                continue;
-            }
-/*             else if(comment == 'y' || comment == 'Y'){
-                char *comment_buf;
-                getchar();
-                printf("What would you like to say?: ");
-                scanf("%s", comment_buf);
-                int check_add = add_balance(bal_buffer, comment_buf);
-                load_add_bal();
-                if(check_add == 1){
-                    printf("Balance updated!\n");
-                    return_home();
-                } */
-/*                 else{
-                    printf("Process failed. Please try again.\n");
-                    break;
-                } */
-            // break;
-            }
-        }
-    else{
-        printf("Process failed.\n");
-        continue;
+while(1){
+    update_balance_menu();
+    int update_balance_choice = get_choice("update_balance");
+
+    switch(update_balance_choice){
+        case 1: // Add
+            clear();
+            add_menu();
+            bal_buffer = get_update_value("add");
+
+        case 2: // Spend
+            clear();
+            add_menu();
+
+        case 3: break;
     }
+
+    if(bal_buffer == 0){ //breaks out of loop if bal_buffer is untouched.
+        break;
+    }
+
+    // at this point, we assume that the bal_buffer has a valid data.
+    // and start the loop point for comment check
+    clear();
+    comment_choice = get_choice("comment");
+    confirm_update_balance = confirm(bal_buffer, comment_buffer);
+    if(confirm_update_balance == 0){
+        printf("test.\n");
+        break;
+    }
+
     break;
 }
+
 break;
 
-
-case 4: printf("Thank you for using BudgetC!"); exit(0);
-}
-continue;  
+case 3: exit(0);
 }
 
 return 0;
+}
 }

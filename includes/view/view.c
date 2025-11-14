@@ -71,12 +71,44 @@ void menu(){
 
 int balance = get_balance();
 printf("Current Balance: %d\n\n", balance);
-printf("1. Add Balance\n");
-printf("2. Spend \n");
-printf("3. View Statistics\n");
-printf("4. Logout\n");
+printf("1. Update Balance\n");
+printf("2. View Statistics\n");
+printf("3. Logout\n");
 printf("What would you like to do?: ");
 
 }
 
 
+void update_balance_menu(){
+    printf("\nUpdate Balance\n");
+    printf("1. Add\n2. Spend\n3. Go Back\n");
+    printf("What would you like to do?: ");
+}
+
+void add_menu(){
+    printf("Add Balance\n\n");
+    printf("How much would you like to add?: ");
+}
+
+
+/* error handlers */
+
+void invalid_choice(int limit){
+    printf("Invalid input. Please choose from 1 - %d\n\n", limit);
+}
+
+void invalid_balance_update(char *mode){
+    if(strcmp(mode, "string") == 0){
+        printf("Invalid input. Please enter a valid number.\n");
+    }
+    else if(strcmp(mode, "negative") == 0){
+        printf("Invalid input. Please enter a non-negative number.\n");
+    }
+    else{
+        printf("invalid add mode bro.\n");
+    }
+}
+
+void invalid_input(){
+    printf("Invalid input. Try again.\n\n");
+}
