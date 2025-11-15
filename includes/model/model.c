@@ -34,10 +34,10 @@ void update_history(char mode, int bal_buffer, char *comment, char *history){
     }
     FILE *history_file = fopen(history, "a");
     if(mode == '+'){
-        fprintf(history_file, "\n+ %d: %s", bal_buffer, comment);
+        fprintf(history_file, "+ %d: %s\n", bal_buffer, comment);
     }
     else{
-        fprintf(history_file, "\n- %d: %s", bal_buffer, comment);
+        fprintf(history_file, "- %d: %s\n", bal_buffer, comment);
     }
     fclose(history_file);
 }
