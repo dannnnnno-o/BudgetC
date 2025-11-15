@@ -2,6 +2,12 @@
 #define MODEL_H
 
 int get_balance(); // returns current balance.
-int update_balance(int current_balance, int bal_buffer, char *comment, char *balance_path, char *add_history_path); // returns 0 if process failed.
+
+void update_balance(char mode, int current_bal, int bal_buffer, char *bal_path);
+void update_history(char mode, int bal_buffer, char *comment, char *history);
+
+int update_account(char mode, int current_balance, int bal_buffer, char *comment, char *balance_path, char *history_path); // returns 0 if process failed.
+
+
 
 #endif

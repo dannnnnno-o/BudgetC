@@ -42,7 +42,6 @@ Sleep(500);
 }
 
 int login(){
-    clear();
     char p[5] = "0000";
     char pin[5];
     while(1){
@@ -68,11 +67,11 @@ int login(){
 
 
 void menu(){
-
+printf("Welcome to BudgetC!\n\n");
 int balance = get_balance();
-printf("Current Balance: %d\n\n", balance);
+printf("Current Balance: %dPHP\n\n", balance);
 printf("1. Update Balance\n");
-printf("2. View Statistics\n");
+printf("2. View History\n");
 printf("3. Logout\n");
 printf("What would you like to do?: ");
 
@@ -90,6 +89,15 @@ void add_menu(){
     printf("How much would you like to add?: ");
 }
 
+void spend_menu(){
+    printf("Spend Balance\n\n");
+    printf("How much did you spend?: ");
+}
+
+void logout(){
+    clear();
+    printf("Thank you for using BudgetC!");
+}
 
 /* error handlers */
 
@@ -103,6 +111,9 @@ void invalid_balance_update(char *mode){
     }
     else if(strcmp(mode, "negative") == 0){
         printf("Invalid input. Please enter a non-negative number.\n");
+    }
+    else if(strcmp(mode, "zero") == 0){
+        printf("You can't add nothing. Try again.\n" );
     }
     else{
         printf("invalid add mode bro.\n");

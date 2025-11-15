@@ -7,8 +7,8 @@ void flush();
 void strip(size_t len, char *comment_buffer);
 
 int get_choice(char *mode);
-int get_update_value(char *mode);
-char comment_check(char comment);
-int confirm(int bal_buffer, char *comment_buffer);
+int get_update_value();
+int confirm(char mode, int bal_buffer, int comment, char *comment_buffer);
+char *get_comment();
 
 #endif

@@ -15,10 +15,14 @@ void update_balance_menu();
 void add_menu();
 void spend_menu();
 
+void logout();
+
 
 /* error handlers */
 void invalid_input();
 void invalid_choice(int limit);
 void invalid_balance_update(char *mode);
+
+
 
 #endif

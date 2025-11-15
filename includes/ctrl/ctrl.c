@@ -87,7 +87,10 @@ while(1){
         continue;
     }
 
-    else if(c == 'y' || c == 'Y'){choice = 1; break;}
+    else if(c == 'y' || c == 'Y'){
+        choice = 1;
+        break;
+    }
 
     else if(c == 'n' || c == 'N'){break;} // choice is 0 by default
     else{
@@ -111,9 +114,9 @@ while(1){
         continue;
     }
 
-    else if(c == 'y' || c == 'Y'){choice = 1; break;}
+    else if(c == 'y' || c == 'Y'){choice = 1; getchar(); break;}
 
-    else if(c == 'n' || c == 'N'){break;} // choice is 0 by default
+    else if(c == 'n' || c == 'N'){getchar(); break;} // choice is 0 by default
     else{
         clear();
         invalid_input();
@@ -125,12 +128,9 @@ while(1){
 return choice;
 }
 
-int get_update_value(char *mode){
+int get_update_value(){
 int value = 0;
-/* add */
-if(strcmp(mode, "add") == 0){
-    while(1){
-    
+while(1){
     if(scanf("%d", &value) != 1){
         clear();
         invalid_balance_update("string");
@@ -138,9 +138,16 @@ if(strcmp(mode, "add") == 0){
         add_menu();
         continue;
     }
-    else if(value <= 0){
+    else if(value < 0){
         clear();
         invalid_balance_update("negative");
+        flush();
+        add_menu();
+        continue;
+    }
+    else if(value == 0){
+        clear();
+        invalid_balance_update("zero");
         flush();
         add_menu();
         continue;
@@ -148,23 +155,24 @@ if(strcmp(mode, "add") == 0){
     else{
         break;
     }
-
-    }
 }
-
-/* spend */
-
-
 return value;
 }
 
 
-int confirm(int bal_buffer, char *comment_buffer){
+int confirm(char mode, int bal_buffer, int comment, char *comment_buffer){
+printf("\n");
 int choice = 0;
 char c;
+if(comment){
 while(1){
-    printf("Add: %d\n", bal_buffer);
-    printf("Comment: %s\n", comment_buffer);
+    if(mode == '+'){
+        printf("Add: %d\n", bal_buffer);
+    }
+    else{
+        printf("Spend: %d\n", bal_buffer);
+    }
+    printf("Comment: %s\n\n", comment_buffer);
     printf("Are you sure you want to update your balance? (y/n): ");
 
     if(scanf(" %c", &c) != 1){
@@ -183,5 +191,45 @@ while(1){
         continue;
     }
 }
+}
+
+else if(!comment){
+while(1){
+    printf("Add: %d\n", bal_buffer);
+    printf("Comment: no comment.\n\n");
+    printf("Are you sure you want to update your balance? (y/n): ");
+
+    if(scanf(" %c", &c) != 1){
+        flush();
+        clear();
+        invalid_input();
+        continue;
+    }
+
+    else if(c == 'y' || c == 'Y'){choice = 1; break;}
+
+    else if(c == 'n' || c == 'N'){break;} // choice is 0 by default
+    else{
+        clear();
+        invalid_input();
+        continue;
+    }
+}
+}
+
+
 return choice;
+}
+
+
+char *get_comment(){
+    printf("Comment: ");
+    char *comment = malloc(255);
+    flush();
+    fgets(comment, 255, stdin);
+    char *comment_dup = strdup(comment);
+    free(comment);
+    
+    strip(strlen(comment_dup), comment_dup);
+    return comment_dup;
 }

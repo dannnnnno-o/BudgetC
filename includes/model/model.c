@@ -14,45 +14,36 @@ int get_balance(){
     return bal;
 }
 
-int update_balance(int current_balance, int bal_buffer, char *comment, char *balance_path, char *add_history_path){
-    FILE *balance = fopen(balance_path, "w");
-    if(balance == NULL){
-        perror("Error opening file");
-        return 1;
+void update_balance(char mode, int current_bal, int bal_buffer, char *bal_path){
+    FILE *balance = fopen(bal_path, "w");
+    int updated_bal;
+
+    if(mode == '+'){
+        updated_bal = current_bal + bal_buffer;
     }
-    int updated_bal = current_balance + bal_buffer;
-
-    if(strcmp(comment, "n") == 0){
-        if (fprintf(balance, "%d", updated_bal) < 0) {
-            perror("fprintf failed.\n");
-            fclose(balance);
-            return 1;
-        }
-
-        fclose(balance);
-        return 0;
+    else{
+        updated_bal = current_bal - bal_buffer;
     }
-
-    else if(strcmp(comment, "n") != 0){
-        FILE *add_history = fopen(add_history_path, "a");
-
-        if (fprintf(balance, "%d", updated_bal) < 0){
-            perror("fprintf failed.\n");
-            fclose(balance);
-            return 1;
-        }
-
-        if(fprintf(add_history, "+ %d - %s", bal_buffer, comment) < 0){
-            perror("add_balance fprintf failed.\n");
-            fclose(balance);
-            fclose(add_history);
-            return 1;
-        }
-        fclose(balance);
-        fclose(add_history);
-        return 0;
-    }
-
+    fprintf(balance, "%d", updated_bal);
     fclose(balance);
-    return 1;
+}
+
+void update_history(char mode, int bal_buffer, char *comment, char *history){
+    if(strcmp(comment, "n") == 0){
+        comment = "no comment.";
+    }
+    FILE *history_file = fopen(history, "a");
+    if(mode == '+'){
+        fprintf(history_file, "\n+ %d: %s", bal_buffer, comment);
+    }
+    else{
+        fprintf(history_file, "\n- %d: %s", bal_buffer, comment);
+    }
+    fclose(history_file);
+}
+
+int update_account(char mode, int current_balance, int bal_buffer, char *comment, char *balance_path, char *history_path){
+    update_balance(mode, current_balance, bal_buffer, balance_path);
+    update_history(mode, bal_buffer, comment, history_path);
+    return 0;
 }
