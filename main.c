@@ -47,35 +47,26 @@ while(1){
             clear();
             add_menu();
             update_mode = '+';
-            bal_buffer = get_update_value();
-            clear();
-            comment_choice = get_choice("comment");
-            if(comment_choice){
-                comment_buffer = get_comment();
-            }
-            else{
-                comment_buffer = "n";
-            }
             break;
 
         case 2: // Spend
             clear();
             spend_menu();
             update_mode = '-';
-            bal_buffer = get_update_value();
-            clear();
-            comment_choice = get_choice("comment");
-            if(comment_choice){
-                comment_buffer = get_comment();
-            }
-            else{
-                comment_buffer = "n";
-            }
             break;
 
         case 3: break;
+    }
 
-        default: invalid_input(); break;
+    bal_buffer = get_update_value();
+    clear();
+
+    comment_choice = get_choice("comment");
+    if(comment_choice){
+        comment_buffer = get_comment();
+    }
+    else{
+        comment_buffer = "n";
     }
     
     if(bal_buffer){
