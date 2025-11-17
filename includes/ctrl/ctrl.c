@@ -22,6 +22,30 @@ void strip(size_t len, char *comment_buffer){
 }
 
 
+int login(){
+    char p[5] = "0000";
+    char pin[255];
+    while(1){
+
+    printf("Login ka muna.\n");
+    
+    printf("Enter Pin: ");
+    fgets(pin, sizeof(pin), stdin);
+    pin[strcspn(pin, "\n")] = '\0'; // accesses the "\n" in username and assigns a null terminator instead 
+
+    if(strcmp(p, pin) == 0){
+        return 1;
+    }
+    else{
+        clear();
+        printf("Mali pin mo tol, ulit ka.\n");
+        continue;
+    }
+
+    
+    }
+}
+
 
 int get_choice(char *mode){
 int choice = 0;    

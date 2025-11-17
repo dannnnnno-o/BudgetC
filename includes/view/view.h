@@ -8,7 +8,6 @@ void load_add_bal();
 
 
 /* UI */
-int login();
 void landing_page();
 void menu();
 void update_balance_menu();

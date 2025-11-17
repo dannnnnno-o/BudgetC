@@ -41,31 +41,6 @@ printf(".");
 Sleep(500);
 }
 
-int login(){
-    char p[5] = "0000";
-    char pin[5];
-    while(1){
-
-    printf("Login ka muna.\n");
-    
-    printf("Enter Pin: ");
-    fgets(pin, sizeof(pin), stdin);
-    pin[strcspn(pin, "\n")] = '\0'; // accesses the "\n" in username and assigns a null terminator instead 
-
-    if(strcmp(p, pin) == 0){
-        return 1;
-    }
-    else{
-        clear();
-        printf("Mali pin mo tol, ulit ka.\n");
-        continue;
-    }
-
-    
-    }
-}
-
-
 void menu(){
 printf("Welcome to BudgetC!\n\n");
 int balance = get_balance();
