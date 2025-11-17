@@ -4,8 +4,7 @@
 void clear();
 
 /* loading pages */
-void load_add_bal();
-
+void loading(int start, char *message, int intervals);
 
 /* UI */
 void landing_page();

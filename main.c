@@ -16,10 +16,10 @@
 
 int main(){
 landing_page();
+loading(1, "Loading", 3);
 clear();
 int current_balance;
 int is_logged_in = login();
-
 while(is_logged_in){
 current_balance = get_balance();
 clear();
@@ -71,13 +71,19 @@ while(1){
     
     if(bal_buffer){
         if(confirm(update_mode, bal_buffer, comment_choice, comment_buffer)){
-        load_add_bal();
-        update_account(update_mode, current_balance, bal_buffer, comment_buffer, BAL_PATH, HISTORY_PATH);
+            clear();
+            loading(0, "Updating your balance", 3);
+            update_account(update_mode, current_balance, bal_buffer, comment_buffer, BAL_PATH, HISTORY_PATH);
+            clear();
+            printf("Balance updated!\n\n");
         }
         else{
         clear();
-        printf("Process canceled.\n");
+        loading(0, "Cancelling process", 3);
+        clear();
+        printf("Process Cancelled.\n\n");
         }
+        loading(0, "Redirecting", 3);
     }
     break;
 }

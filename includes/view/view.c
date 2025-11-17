@@ -13,32 +13,23 @@ void clear(){
 }
 
 /* loading pages */
-void load_add_bal(){
-    printf("Adding balance");
-    Sleep(250);
-    printf(".");
-    Sleep(250);
-    printf(".");
-    Sleep(250);
-    printf(".");
-    Sleep(250);
-    printf("\n");
+
+void loading(int start, char *message, int intervals){
+    if(start){Sleep(1000);}
+    printf("%s", message);
+    for(int i = 0; i < intervals; i++){
+        Sleep(500);
+        printf(".");
+    }
+    Sleep(500);
 }
+
 
 /* UI */
 void landing_page(){
 
 printf("Welcome to BudgetC!\n");
 printf("    This app serves as a mini-budgeting tool where users can keep track of their\n budget and expenses through the command line.\n\n");
-Sleep(1000);
-printf("Loading");
-Sleep(500);
-printf(".");
-Sleep(500);
-printf(".");
-Sleep(500);
-printf(".");
-Sleep(500);
 }
 
 void menu(){
