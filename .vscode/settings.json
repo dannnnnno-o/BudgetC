@@ -7,6 +7,7 @@
         "time.h": "c",
         "view.h": "c",
         "model.h": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "transact.h": "c"
     }
 }

@@ -1,6 +1,9 @@
 #ifndef VIEW_H
 #define VIEW_H
 
+#include "../transact.h"
+
+
 void clear();
 
 /* loading pages */
@@ -12,7 +15,6 @@ void menu();
 void update_balance_menu();
 void add_menu();
 void spend_menu();
-
 void logout();
 
 

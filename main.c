@@ -9,6 +9,7 @@
 #include "includes/model/model.h"
 #include "includes/ctrl/ctrl.h"
 #include "includes/view/view.h"
+#include "includes/transact.h"
 
 #define BAL_PATH "includes/db/balance.txt"
 #define HISTORY_PATH "includes/db/history.txt"

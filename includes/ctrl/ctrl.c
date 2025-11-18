@@ -8,6 +8,7 @@
 
 #include "ctrl.h"
 #include "../view/view.h"
+#include "../transact.h"
 
 
 void flush(){

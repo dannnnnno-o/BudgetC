@@ -4,7 +4,9 @@
 #include <time.h>
 #include <unistd.h>
 #include <Windows.h>
+
 #include "model.h"
+#include "../transact.h"
 
 int get_balance(){
     FILE *balance = fopen("includes/db/balance.txt", "r");

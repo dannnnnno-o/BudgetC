@@ -1,6 +1,9 @@
 #ifndef MODEL_H
 #define MODEL_H
 
+#include "../transact.h"
+
+
 int get_balance(); // returns current balance.
 
 void update_balance(char mode, int current_bal, int bal_buffer, char *bal_path);

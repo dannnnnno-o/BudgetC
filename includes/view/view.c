@@ -8,6 +8,9 @@
 #include "../ctrl/ctrl.h"
 #include "../model/model.h"
 
+#include "../transact.h"
+
+
 void clear(){
     system("cls");
 }
