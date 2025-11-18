@@ -84,6 +84,7 @@ while(1){
         clear();
         printf("Process Cancelled.\n\n");
         }
+        free(comment_buffer);
         loading(0, "Redirecting", 3);
     }
     break;
