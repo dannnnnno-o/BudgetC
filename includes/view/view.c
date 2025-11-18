@@ -89,3 +89,12 @@ void invalid_balance_update(char *mode){
 void invalid_input(){
     printf("Invalid input. Try again.\n\n");
 }
+
+void history_menu(){
+    printf("HISTORY\n\n");
+    printf("1. All\n");
+    printf("2. Added\n");
+    printf("3. Spent\n");
+    printf("4. Go Back\n");
+    printf("What transactions would you like to see?: ");
+}
