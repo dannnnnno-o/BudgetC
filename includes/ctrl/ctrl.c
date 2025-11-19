@@ -150,6 +150,22 @@ while(1){
 }
 }
 
+
+if(strcmp(mode, "history") == 0){
+while(1){
+    if(scanf("%d", &choice) != 1 || (choice <= 0 || choice > 4)){
+        clear();
+        invalid_choice(4);
+        history_menu();
+        flush();
+        continue;
+    }
+    else{
+        getchar();
+        break;
+    }
+}
+}
 return choice;
 }
 
@@ -257,4 +273,8 @@ char *get_comment(){
     
     strip(strlen(comment_dup), comment_dup);
     return comment_dup;
+}
+
+void wait_for_enter(){
+    while(getchar() != '\n');
 }

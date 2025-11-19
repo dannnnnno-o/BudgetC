@@ -49,3 +49,20 @@ int update_account(char mode, int current_balance, int bal_buffer, char *comment
     update_history(mode, bal_buffer, comment, history_path);
     return 0;
 }
+
+void get_transactions(char *mode, char *history_path){
+    if(strcmp(mode, "all") == 0){
+        printf("All transactions.\n");
+    }
+
+    else if(strcmp(mode, "add") == 0){
+        printf("Added Balance.\n");
+    }
+
+    else if(strcmp(mode, "spent") == 0){
+        printf("Spent balance.\n");
+    }
+    else{
+        printf("invalid transaction mode.\n");
+    }
+}

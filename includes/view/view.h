@@ -15,6 +15,8 @@ void menu();
 void update_balance_menu();
 void add_menu();
 void spend_menu();
+void history_menu();
+
 void logout();
 
 
