@@ -50,19 +50,37 @@ int update_account(char mode, int current_balance, int bal_buffer, char *comment
     return 0;
 }
 
-void get_transactions(char *mode, char *history_path){
+int get_line_count(char *path){
+    FILE *file = fopen(path, "r");
+    char buffer[256];
+    int line = 0;
+    while(fgets(buffer, sizeof(buffer), file) != NULL){
+        line++;
+        // printf("%d == %s", line, buffer);
+    }
+    fclose(file);
+    return line;
+}
+
+Transact *get_transactions(char *mode, char *history_path, int count){
+
+Transact *transactions = malloc(count);
+FILE *file = fopen(history_path, "r");
+char buffer[1024];
+
+while(fgets(buffer, sizeof(buffer), file)){
     if(strcmp(mode, "all") == 0){
-        printf("All transactions.\n");
+        
     }
-
     else if(strcmp(mode, "add") == 0){
-        printf("Added Balance.\n");
-    }
 
+    }
     else if(strcmp(mode, "spent") == 0){
-        printf("Spent balance.\n");
+
     }
     else{
         printf("invalid transaction mode.\n");
     }
+}
+return transactions;
 }

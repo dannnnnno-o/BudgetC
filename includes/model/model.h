@@ -11,7 +11,8 @@ void update_history(char mode, int bal_buffer, char *comment, char *history);
 
 int update_account(char mode, int current_balance, int bal_buffer, char *comment, char *balance_path, char *history_path); // returns 0 if process failed.
 
-void get_transactions(char *mode, char *history_path);
+int get_line_count(char *path);
+Transact *get_transactions(char *mode, char *history_path, int count);
 
 
 #endif

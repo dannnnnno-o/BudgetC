@@ -99,14 +99,15 @@ break;
 
 case 2: 
 while(1){
-
-    clear();
+int transaction_count = get_line_count(HISTORY_PATH);
+Transact *transactions = malloc(transaction_count);
+    // clear();
     history_menu();
     history = get_choice("history");
     switch(history){
-        case 1: get_transactions("all", HISTORY_PATH); break;
-        case 2: get_transactions("add", HISTORY_PATH); break;
-        case 3: get_transactions("spent", HISTORY_PATH); break;
+        case 1: transactions = get_transactions("all", HISTORY_PATH, transaction_count); break;
+        case 2: transactions = get_transactions("add", HISTORY_PATH, transaction_count); break;
+        case 3: transactions = get_transactions("spent", HISTORY_PATH, transaction_count); break;
         case 4: home = 'y'; break;
     }
 
@@ -115,6 +116,8 @@ while(1){
         loading(0, "Redirecting you to homepage", 3);
         break;
     }
+
+    view_transactions(transactions);
 
     printf("Press Enter to go back.\n");
     wait_for_enter();

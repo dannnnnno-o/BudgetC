@@ -6,7 +6,7 @@ typedef struct {
     char *tag;
     int amount; 
     char *comment;
-} Transaction;
+} Transact;
 
 
 #endif

@@ -39,9 +39,9 @@ void menu(){
 printf("Welcome to BudgetC!\n\n");
 int balance = get_balance();
 printf("Current Balance: %dPHP\n\n", balance);
-printf("1. Update Balance\n");
-printf("2. View History\n");
-printf("3. Logout\n");
+printf("[1]. Update Balance\n");
+printf("[2]. View History\n");
+printf("[3]. Logout\n");
 printf("What would you like to do?: ");
 
 }
@@ -49,7 +49,9 @@ printf("What would you like to do?: ");
 
 void update_balance_menu(){
     printf("\nUpdate Balance\n");
-    printf("1. Add\n2. Spend\n3. Go Back\n");
+    printf("[1]. Add\n");
+    printf("[2]. Spend\n");
+    printf("[3]. Go Back\n");
     printf("What would you like to do?: ");
 }
 
@@ -95,9 +97,9 @@ void invalid_input(){
 
 void history_menu(){
     printf("HISTORY\n\n");
-    printf("1. All\n");
-    printf("2. Added\n");
-    printf("3. Spent\n");
-    printf("4. Go Back\n");
+    printf("[1]. All\n");
+    printf("[2]. Added\n");
+    printf("[3]. Spent\n");
+    printf("[4]. Go Back\n");
     printf("What transactions would you like to see?: ");
 }
