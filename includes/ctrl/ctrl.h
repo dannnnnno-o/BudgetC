@@ -12,5 +12,6 @@ int get_update_value();
 int confirm(char mode, int bal_buffer, int comment, char *comment_buffer);
 char *get_comment();
 void wait_for_enter();
+char *get_date();
 
 #endif

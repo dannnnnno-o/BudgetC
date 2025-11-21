@@ -277,3 +277,17 @@ char *get_comment(){
 void wait_for_enter(){
     while(getchar() != '\n');
 }
+
+char *get_date(){
+    char date[32];
+
+    time_t now = time(NULL);
+    struct tm *local_time = localtime(&now);
+
+    int day =  local_time->tm_mday;
+    int month = local_time->tm_mon + 1;
+    int year = local_time->tm_year - 100;
+    
+    sprintf(date, "%d-%d-%d", month, day, year);
+    return strdup(date);
+}

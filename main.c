@@ -101,10 +101,22 @@ while(1){
     clear();
     history_menu();
     history = get_choice("history");
+    clear();
+    loading(0, "Loading transactions", 2);
+    clear();
     switch(history){
-        case 1: get_transactions("all", HISTORY_PATH); break;
-        case 2: get_transactions("add", HISTORY_PATH); break;
-        case 3: get_transactions("spent", HISTORY_PATH); break;
+        case 1:
+            title("ALL TRANSACTIONS"); 
+            view_transactions("all", HISTORY_PATH); 
+            break;
+        case 2: 
+            title("ADDED BALANCE");
+            view_transactions("add", HISTORY_PATH);
+            break;
+        case 3: 
+            title("SPENT BALANCE");
+            view_transactions("spent", HISTORY_PATH); 
+            break;
         case 4: home = 'y'; break;
     }
 
@@ -114,10 +126,10 @@ while(1){
         break;
     }
 
-    printf("Press Enter to go back.\n");
+    printf("\n\nPress Enter to go back.\n");
     wait_for_enter();
     clear();
-    loading(0, "Redirecting", 3);
+    loading(0, "Redirecting", 2);
     clear();
     continue;
 }
@@ -130,7 +142,6 @@ case 3:
     logout(); 
     exit(0);
 }
-
 continue;
 }
 return 0;

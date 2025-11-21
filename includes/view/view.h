@@ -7,6 +7,7 @@ void clear();
 void loading(int start, char *message, int intervals);
 
 /* UI */
+void title(char *title);
 void landing_page();
 void menu();
 void update_balance_menu();

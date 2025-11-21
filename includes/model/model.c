@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <Windows.h>
 #include "model.h"
+#include "../ctrl/ctrl.h"
 
 int get_balance(){
     FILE *balance = fopen("includes/db/balance.txt", "r");
@@ -29,15 +30,17 @@ void update_balance(char mode, int current_bal, int bal_buffer, char *bal_path){
 }
 
 void update_history(char mode, int bal_buffer, char *comment, char *history){
+    char *date;
+    date = get_date();
     if(strcmp(comment, "n") == 0){
         comment = "no comment.";
     }
     FILE *history_file = fopen(history, "a");
     if(mode == '+'){
-        fprintf(history_file, "+ %d: %s\n", bal_buffer, comment);
+        fprintf(history_file, "%s | + %d: %s\n", date, bal_buffer, comment);
     }
     else{
-        fprintf(history_file, "- %d: %s\n", bal_buffer, comment);
+        fprintf(history_file, "%s | - %d: %s\n", date, bal_buffer, comment);
     }
     fclose(history_file);
 }
@@ -48,19 +51,34 @@ int update_account(char mode, int current_balance, int bal_buffer, char *comment
     return 0;
 }
 
-void get_transactions(char *mode, char *history_path){
+void view_transactions(char *mode, char *history_path){
+    FILE *file = fopen(history_path, "r");
+    char buffer[256];
+
+
     if(strcmp(mode, "all") == 0){
-        printf("All transactions.\n");
+        while(fgets(buffer, sizeof(buffer), file) != NULL){
+            printf("%s", buffer);
+        }
     }
 
     else if(strcmp(mode, "add") == 0){
-        printf("Added Balance.\n");
+        while(fgets(buffer, sizeof(buffer), file) != NULL){
+            if(buffer[11] == '+'){
+            printf("%s", buffer);
+            }
+        }
     }
 
     else if(strcmp(mode, "spent") == 0){
-        printf("Spent balance.\n");
+        while(fgets(buffer, sizeof(buffer), file) != NULL){
+            if(buffer[11] == '-')
+            printf("%s", buffer);
+        }
     }
     else{
         printf("invalid transaction mode.\n");
     }
+
+    fclose(file);
 }
