@@ -15,7 +15,7 @@
 #define COMMENT_SIZE 256
 
 int main(){
-
+clear();
 landing_page();
 loading(1, "Loading", 3);
 clear();
@@ -102,8 +102,10 @@ while(1){
     history_menu();
     history = get_choice("history");
     clear();
-    loading(0, "Loading transactions", 2);
-    clear();
+    if(history != 4){
+        loading(0, "Loading transactions", 2);
+        clear();
+    }
     switch(history){
         case 1:
             title("ALL TRANSACTIONS"); 
@@ -122,7 +124,6 @@ while(1){
 
     if(home == 'y'){
         clear();
-        loading(0, "Redirecting you to homepage", 3);
         break;
     }
 

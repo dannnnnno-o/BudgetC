@@ -54,26 +54,40 @@ int update_account(char mode, int current_balance, int bal_buffer, char *comment
 void view_transactions(char *mode, char *history_path){
     FILE *file = fopen(history_path, "r");
     char buffer[256];
+    int i = 0;
 
 
     if(strcmp(mode, "all") == 0){
         while(fgets(buffer, sizeof(buffer), file) != NULL){
+            i++;
             printf("%s", buffer);
+        }
+        if(!i){
+            printf("\nYou have not completed any transactions yet.\n");
         }
     }
 
     else if(strcmp(mode, "add") == 0){
         while(fgets(buffer, sizeof(buffer), file) != NULL){
             if(buffer[11] == '+'){
-            printf("%s", buffer);
+                i++;
+                printf("%s", buffer);
             }
+        }
+        if(!i){
+            printf("\nYou have not added any amount to your balance yet.\n");
         }
     }
 
     else if(strcmp(mode, "spent") == 0){
         while(fgets(buffer, sizeof(buffer), file) != NULL){
-            if(buffer[11] == '-')
-            printf("%s", buffer);
+            if(buffer[11] == '-'){
+                i++;
+                printf("%s", buffer);
+            }
+        }
+        if(!i){
+            printf("\nYou have not spent any amount yet.\n");
         }
     }
     else{
