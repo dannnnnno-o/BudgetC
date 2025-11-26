@@ -79,7 +79,8 @@ void view_transactions(char *mode, char *history_path){
         while(fgets(buffer, sizeof(buffer), file) != NULL){
             i++;
             if(buffer[11] == '+'){
-            printf("%s", buffer);
+                i++;
+                printf("%s", buffer);
             }
         }
         if(!i){
@@ -103,44 +104,3 @@ void view_transactions(char *mode, char *history_path){
 
     fclose(file);
 }
-
-/* char *get_transact_date(char *transaction){
-    char *date;
-    for(int i = 0; i < 9; i++){
-        date[i] = transaction[i];
-        printf("%c\n", date[i]);
-    }
-} */
-
-
-/* 
-store current date -> compare to next 
-
-if(cur_date == next_date){continue;}
-else{printf("\n");}
-
-
-*/
-
-/*
-
-11-26-25 | - 10: no comment.
--- store current date
-11-26-25 | - 200: no comment. //compares
-11-26-25 | - 200: sample comment //compares
-
--- separates because of diff date-- 
-
-11-27-25 | - 200: sample comment //compares != == separate & store date
-11-27-25 | - 200: sample comment //compares
-11-27-25 | - 200: sample comment //compares
-
--- separates because of diff date-- 
-
-11-28-25 | - 200: sample comment //compares != == separate & store date
-11-28-25 | - 200: sample comment
-11-28-25 | - 200: sample comment
-
-
-
-*/
