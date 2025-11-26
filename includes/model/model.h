@@ -10,5 +10,5 @@ int update_account(char mode, int current_balance, int bal_buffer, char *comment
 
 void view_transactions(char *mode, char *history_path);
 
-
+char *get_transact_date(char *transaction);
 #endif

@@ -54,11 +54,25 @@ int update_account(char mode, int current_balance, int bal_buffer, char *comment
 void view_transactions(char *mode, char *history_path){
     FILE *file = fopen(history_path, "r");
     char buffer[256];
-
+    char curr_date[11];
+    char next_date[10];
 
     if(strcmp(mode, "all") == 0){
-        while(fgets(buffer, sizeof(buffer), file) != NULL){
-            printf("%s", buffer);
+        char *line = fgets(buffer, sizeof(buffer), file);
+        while(line != NULL){
+            strncpy(curr_date, buffer, 8);
+            curr_date[8] = '\n';
+
+            line = fgets(buffer, sizeof(buffer), file);
+            strncpy(next_date, buffer, 8);
+
+
+            if(strncmp(curr_date, next_date, 8) != 0){
+                printf("\n\n--------------\n");
+                printf("|| %s|| \n", next_date);
+                printf("--------------\n");
+            }
+            if(line != NULL){printf("%s", line);}
         }
     }
 
@@ -82,3 +96,44 @@ void view_transactions(char *mode, char *history_path){
 
     fclose(file);
 }
+
+/* char *get_transact_date(char *transaction){
+    char *date;
+    for(int i = 0; i < 9; i++){
+        date[i] = transaction[i];
+        printf("%c\n", date[i]);
+    }
+} */
+
+
+/* 
+store current date -> compare to next 
+
+if(cur_date == next_date){continue;}
+else{printf("\n");}
+
+
+*/
+
+/*
+
+11-26-25 | - 10: no comment.
+-- store current date
+11-26-25 | - 200: no comment. //compares
+11-26-25 | - 200: sample comment //compares
+
+-- separates because of diff date-- 
+
+11-27-25 | - 200: sample comment //compares != == separate & store date
+11-27-25 | - 200: sample comment //compares
+11-27-25 | - 200: sample comment //compares
+
+-- separates because of diff date-- 
+
+11-28-25 | - 200: sample comment //compares != == separate & store date
+11-28-25 | - 200: sample comment
+11-28-25 | - 200: sample comment
+
+
+
+*/
