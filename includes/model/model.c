@@ -58,30 +58,43 @@ void view_transactions(char *mode, char *history_path){
     char *curr_date;
     char *next_date;
     char *line;
+    int i = 0;
 
     if(strcmp(mode, "all") == 0){
         line = fgets(buffer, sizeof(buffer), file);
         while(line != NULL){
+            i++;
             curr_date = get_transact_date(buffer); // get curr_date
             line = fgets(buffer, sizeof(buffer), file); // get next_line
             next_date = get_transact_date(buffer); //get next_date
             if(strncmp(curr_date, next_date, 8) != 0){print_transact_date(next_date);} //print if curr != next
             if(line != NULL){printf("%s", line);} //print line if(line)
         }
+        if(!i){
+            printf("\nYou have not completed any transactions yet.\n");
+        }
     }
 
     else if(strcmp(mode, "add") == 0){
         while(fgets(buffer, sizeof(buffer), file) != NULL){
+            i++;
             if(buffer[11] == '+'){
             printf("%s", buffer);
             }
+        }
+        if(!i){
+            printf("\nYou have not added any amount to your balance yet.\n");
         }
     }
 
     else if(strcmp(mode, "spent") == 0){
         while(fgets(buffer, sizeof(buffer), file) != NULL){
+            i++;
             if(buffer[11] == '-')
             printf("%s", buffer);
+        }
+        if(!i){
+            printf("\nYou have not spent any amount yet.\n");
         }
     }
     else{
