@@ -3,7 +3,6 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include <Windows.h>
 #include <stddef.h> // for size_t
 
 #include "includes/model/model.h"
@@ -17,7 +16,6 @@
 int main(){
 clear();
 landing_page();
-loading(1, "Loading", 3);
 clear();
 
 int current_balance;
@@ -77,18 +75,14 @@ while(1){
     if(bal_buffer){
         if(confirm(update_mode, bal_buffer, comment_choice, comment_buffer)){
             clear();
-            loading(0, "Updating your balance", 3);
             update_account(update_mode, current_balance, bal_buffer, comment_buffer, BAL_PATH, HISTORY_PATH);
             clear();
             printf("Balance updated!\n\n");
         }
         else{
         clear();
-        loading(0, "Cancelling process", 3);
-        clear();
         printf("Process Cancelled.\n\n");
         }
-        loading(0, "Redirecting", 3);
     }
     break;
 }
@@ -103,7 +97,6 @@ while(1){
     history = get_choice("history");
     clear();
     if(history != 4){
-        loading(0, "Loading transactions", 2);
         clear();
     }
     switch(history){
@@ -130,15 +123,12 @@ while(1){
     printf("\n\nPress Enter to go back.\n");
     wait_for_enter();
     clear();
-    loading(0, "Redirecting", 2);
-    clear();
     continue;
 }
 break;
 
 case 3:
     clear();
-    loading(0, "Logging you out", 3);
     // could ask for confirmation here
     logout(); 
     exit(0);

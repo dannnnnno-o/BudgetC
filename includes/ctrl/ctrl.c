@@ -3,7 +3,6 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include <Windows.h>
 #include <stddef.h>
 
 #include "ctrl.h"

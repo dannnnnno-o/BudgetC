@@ -3,25 +3,24 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include <Windows.h>
 #include "view.h"
 #include "../ctrl/ctrl.h"
 #include "../model/model.h"
 
 void clear(){
-    system("cls");
+    system("clear");
 }
 
 /* loading pages */
 
 void loading(int start, char *message, int intervals){
-    if(start){Sleep(1000);}
+    if(start){sleep(1);}
     printf("%s", message);
     for(int i = 0; i < intervals; i++){
-        Sleep(500);
+        sleep(1);
         printf(".");
     }
-    Sleep(500);
+    sleep(1);
 }
 
 
@@ -79,7 +78,7 @@ void spend_menu(){
 
 void logout(){
     clear();
-    printf("Thank you for using BudgetC!");
+    printf("Thank you for using BudgetC!\n");
 }
 
 /* error handlers */
