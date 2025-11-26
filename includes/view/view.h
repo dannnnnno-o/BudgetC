@@ -23,6 +23,7 @@ void invalid_input();
 void invalid_choice(int limit);
 void invalid_balance_update(char *mode);
 
+void print_transact_date(char *date);
 
 
 #endif

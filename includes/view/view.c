@@ -115,3 +115,10 @@ void history_menu(){
     printf("[4]. Go Back\n");
     printf("What transactions would you like to see?: ");
 }
+
+void print_transact_date(char *date){
+    printf("\n\n");
+    printf("--------------\n");
+    printf("|| %s ||\n", date);
+    printf("--------------\n");
+}

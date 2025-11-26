@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include "model.h"
 #include "../ctrl/ctrl.h"
+#include "../view/view.h"
 
 int get_balance(){
     FILE *balance = fopen("includes/db/balance.txt", "r");
@@ -54,25 +55,18 @@ int update_account(char mode, int current_balance, int bal_buffer, char *comment
 void view_transactions(char *mode, char *history_path){
     FILE *file = fopen(history_path, "r");
     char buffer[256];
-    char curr_date[11];
-    char next_date[10];
+    char *curr_date;
+    char *next_date;
+    char *line;
 
     if(strcmp(mode, "all") == 0){
-        char *line = fgets(buffer, sizeof(buffer), file);
+        line = fgets(buffer, sizeof(buffer), file);
         while(line != NULL){
-            strncpy(curr_date, buffer, 8);
-            curr_date[8] = '\n';
-
-            line = fgets(buffer, sizeof(buffer), file);
-            strncpy(next_date, buffer, 8);
-
-
-            if(strncmp(curr_date, next_date, 8) != 0){
-                printf("\n\n--------------\n");
-                printf("|| %s|| \n", next_date);
-                printf("--------------\n");
-            }
-            if(line != NULL){printf("%s", line);}
+            curr_date = get_transact_date(buffer); // get curr_date
+            line = fgets(buffer, sizeof(buffer), file); // get next_line
+            next_date = get_transact_date(buffer); //get next_date
+            if(strncmp(curr_date, next_date, 8) != 0){print_transact_date(next_date);} //print if curr != next
+            if(line != NULL){printf("%s", line);} //print line if(line)
         }
     }
 
