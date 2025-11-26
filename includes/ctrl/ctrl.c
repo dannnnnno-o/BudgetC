@@ -290,3 +290,11 @@ char *get_date(){
     sprintf(date, "%d-%d-%d", month, day, year);
     return strdup(date);
 }
+<<<<<<< HEAD
+=======
+
+char *get_transact_date(char *transaction){
+    char date[9];
+    return strdup(strncpy(date, transaction, 8));
+}
+>>>>>>> history
