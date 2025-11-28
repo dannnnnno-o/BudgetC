@@ -344,8 +344,13 @@ while(1){
     if(scanf("%d", &amount) != 1){
         clear();
         invalid_goal_input("amount");
+        flush();
         title("Set Goal");
         continue;
+    }
+    else{
+        getchar();
+        break;
     }
     break;
 }
@@ -353,10 +358,9 @@ return amount;
 }
 
 char *get_goal_date(){
-    char *date;
-    while(1){
-        printf("Enter your target date: ");
-        scanf("%s", date);
-    }
-    return strdup(date);
+    char *date = malloc(255);
+    printf("Enter your target date: ");
+    fgets(date, 255, stdin);
+    strip(strlen(date), date);
+    return date;
 }

@@ -143,10 +143,10 @@ void invalid_input(){
 
 void invalid_goal_input(char *mode){
     if(strcmp(mode, "amount") == 0){
-        printf("Invalid target amount. Please enter a valid target amount.");
+        printf("Invalid target amount. Please enter a valid target amount.\n");
     }
     else if(strcmp(mode, "date") == 0){
-        printf("Invalid target date. Please enter a valid target date");
+        printf("Invalid target date. Please enter a valid target date\n");
     }
     
     else{

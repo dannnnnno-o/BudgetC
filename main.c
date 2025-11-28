@@ -141,6 +141,7 @@ break;
 case 3: //GOAL
 Goal goal = get_goal(GOAL_PATH);
 int goal_choice;
+Goal goal_buf = {0, NULL};
 
 clear();
 if(goal.amount){
@@ -156,16 +157,26 @@ if(goal.amount){
 }
 else if(!goal.amount){
     goal_menu(0);
+
     goal_choice = get_choice("no_goal");
     clear();
     if(goal_choice == 2){
         break;
     }
     title("Set Goal");
-    Goal goal_buf = {0, NULL};
     goal_buf.amount = get_goal_amount();
     goal_buf.date = get_goal_date();
 }
+    if(update_goal(GOAL_PATH, goal_buf)){
+        printf("Can't update goal\n");
+    }
+    printf("\n");
+    loading(0, "Updating goal", 3);
+    clear();
+    title("GOAL UPDATED!");
+    printf("Press enter to return.\n");
+    wait_for_enter();
+    break;
 
 break;
 
