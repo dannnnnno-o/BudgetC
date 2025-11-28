@@ -54,9 +54,9 @@ title("Welcome to BudgetC!");
 printf("Current Balance: %dPHP\n\n", balance);
 printf("[1]. Update Balance\n");
 printf("[2]. View History\n");
-printf("[3]. Logout\n");
+printf("[3]. Goal\n");
+printf("[4]. Logout\n");
 printf("What would you like to do?: ");
-
 }
 
 void update_balance_menu(){
@@ -76,6 +76,38 @@ void spend_menu(){
     title("SPEND BALANCE");
     printf("How much did you spend?: ");
 }
+
+void history_menu(){
+    title("HISTORY");
+    printf("[1]. All\n");
+    printf("[2]. Added\n");
+    printf("[3]. Spent\n");
+    printf("[4]. Go Back\n");
+    printf("What transactions would you like to see?: ");
+}
+/* start of goal */
+void goal_menu(int has_goal){
+    title("GOAL");
+
+    if(has_goal){
+        // printf("[1]. ")
+    }
+    else if(!has_goal){
+        printf("Goal isn't set yet.\n\n");
+        
+        printf("[1]. Set Goal\n");
+        printf("[2]. Go Back\n");
+    }
+    else{
+        printf("Invalid goal_menu() mode.");
+    }
+}
+
+void set_goal_menu(){
+
+}
+
+/* end of goal */
 
 void logout(){
     clear();
@@ -107,11 +139,17 @@ void invalid_input(){
     printf("Invalid input. Try again.\n\n");
 }
 
-void history_menu(){
-    title("HISTORY");
-    printf("[1]. All\n");
-    printf("[2]. Added\n");
-    printf("[3]. Spent\n");
-    printf("[4]. Go Back\n");
-    printf("What transactions would you like to see?: ");
+
+
+void invalid_goal_input(char *mode){
+    if(strcmp(mode, "amount") == 0){
+        printf("Invalid target amount. Please enter a valid target amount.");
+    }
+    else if(strcmp(mode, "date") == 0){
+        printf("Invalid target date. Please enter a valid target date");
+    }
+    
+    else{
+        printf("Invalid goal input mode\n");
+    }
 }

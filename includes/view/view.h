@@ -15,6 +15,9 @@ void add_menu();
 void spend_menu();
 void history_menu();
 
+void goal_menu(int has_goal);
+void set_goal_menu();
+
 void logout();
 
 
@@ -22,7 +25,7 @@ void logout();
 void invalid_input();
 void invalid_choice(int limit);
 void invalid_balance_update(char *mode);
-
+void invalid_goal_input(char *mode);
 
 
 #endif

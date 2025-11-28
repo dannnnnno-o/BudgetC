@@ -77,17 +77,10 @@ if(strcmp(mode, "landing_page") == 0){
 /* update balance */
 if(strcmp(mode, "update_balance") == 0){
         while(1){
-        if(scanf("%d", &choice) != 1){
+        update_balance_menu();
+        if((scanf("%d", &choice) != 1) || (choice <= 0 || choice > 3)){
         clear();
         invalid_choice(3);
-        update_balance_menu();
-        flush();
-        continue;
-        }
-        if(choice <= 0 || choice > 3){
-        clear();
-        invalid_choice(3);
-        update_balance_menu();
         flush();
         continue;
         }
@@ -149,7 +142,7 @@ while(1){
 }
 }
 
-
+/* history */
 if(strcmp(mode, "history") == 0){
 while(1){
     if(scanf("%d", &choice) != 1 || (choice <= 0 || choice > 4)){
@@ -165,6 +158,42 @@ while(1){
     }
 }
 }
+
+/* goal menu */
+if(strcmp(mode, "goal") == 0){
+    while(1){
+        printf("What would you like to do?: ");
+        if((scanf("%d", &choice) != 1) || (choice <= 0 || choice > 5)){
+            clear();
+            invalid_choice(5);
+            //men
+            flush();
+            continue;
+        }
+        else{
+            getchar();
+            break;
+        }
+    }
+}
+if(strcmp(mode, "no_goal") == 0){
+    while(1){
+        printf("What would you like to do?: ");
+        if((scanf("%d", &choice) != 1) || (choice <= 0 || choice > 2)){
+            clear();
+            invalid_choice(2);
+            flush();
+            continue;
+        }
+        else{
+            getchar();
+            break;
+        }
+    }
+}
+
+/* end of goal menu */
+
 return choice;
 }
 
@@ -289,5 +318,45 @@ char *get_date(){
     int year = local_time->tm_year - 100;
     
     sprintf(date, "%d-%d-%d", month, day, year);
+    return strdup(date);
+}
+
+Goal get_goal(char *path){
+    FILE *file = fopen(path, "r");
+    char buffer[255];
+    Goal goal = {0, NULL}; // initialize all to null for error handling
+    for(int i = 0; i < 2; i++){
+        if(fgets(buffer, sizeof(buffer), file) == NULL){break;}
+        switch(i){
+            case 0: goal.amount = atoi(strdup(buffer)); break;
+            case 1: goal.date = strdup(buffer); break;
+        }
+    }
+    fclose(file);
+    return goal;
+}
+
+
+int get_goal_amount(){
+int amount;
+while(1){
+    printf("What is your target amount?: ");
+    if(scanf("%d", &amount) != 1){
+        clear();
+        invalid_goal_input("amount");
+        title("Set Goal");
+        continue;
+    }
+    break;
+}
+return amount;
+}
+
+char *get_goal_date(){
+    char *date;
+    while(1){
+        printf("Enter your target date: ");
+        scanf("%s", date);
+    }
     return strdup(date);
 }

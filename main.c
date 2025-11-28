@@ -9,9 +9,11 @@
 #include "includes/model/model.h"
 #include "includes/ctrl/ctrl.h"
 #include "includes/view/view.h"
+#include "includes/goal.h"
 
 #define BAL_PATH "includes/db/balance.txt"
 #define HISTORY_PATH "includes/db/history.txt"
+#define GOAL_PATH "includes/db/goal.txt"
 #define COMMENT_SIZE 256
 
 int main(){
@@ -136,7 +138,38 @@ while(1){
 }
 break;
 
-case 3:
+case 3: //GOAL
+Goal goal = get_goal(GOAL_PATH);
+int goal_choice;
+
+clear();
+if(goal.amount){
+    goal_menu(1);
+    goal_choice = get_choice("goal");
+    switch(goal_choice){
+        case 1: //invest money
+        case 2: //take money
+        case 3: //further details (comment thingy)
+        case 4: //remove goal
+        case 5: // go back;
+    }
+}
+else if(!goal.amount){
+    goal_menu(0);
+    goal_choice = get_choice("no_goal");
+    clear();
+    if(goal_choice == 2){
+        break;
+    }
+    title("Set Goal");
+    Goal goal_buf = {0, NULL};
+    goal_buf.amount = get_goal_amount();
+    goal_buf.date = get_goal_date();
+}
+
+break;
+
+case 4:
     clear();
     loading(0, "Logging you out", 3);
     // could ask for confirmation here
