@@ -53,13 +53,18 @@ int update_account(char mode, int current_balance, int bal_buffer, char *comment
 
 int update_goal(char *path, Goal goal){
     FILE *file = fopen(path, "w");
-        if (fprintf(file, "%d\n%s", goal.amount, goal.date ) < 0) {
+        if (fprintf(file, "%s\n%d\n%s", goal.name, goal.amount, goal.date ) < 0) {
         perror("Error writing to file");
         fclose(file);
         return EXIT_FAILURE;
     }
     fclose(file);
     return 0;
+}
+
+void remove_goal(char *path){
+    FILE *file = fopen(path, "w");
+    fclose(file);
 }
 
 
@@ -108,3 +113,4 @@ void view_transactions(char *mode, char *history_path){
 
     fclose(file);
 }
+

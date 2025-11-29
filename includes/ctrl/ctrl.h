@@ -16,7 +16,12 @@ void wait_for_enter();
 char *get_date();
 
 Goal get_goal(char *path);
+char *get_goal_name();
 int get_goal_amount();
 char *get_goal_date();
-char *get_goal_comment();
+int get_goal_progress(int amount);
+
+int confirm_goal_removal(Goal goal);
+
+
 #endif

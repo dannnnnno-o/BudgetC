@@ -7,6 +7,7 @@
 #include "view.h"
 #include "../ctrl/ctrl.h"
 #include "../model/model.h"
+#include "../goal.h"
 
 void clear(){
     system("cls");
@@ -86,13 +87,22 @@ void history_menu(){
     printf("What transactions would you like to see?: ");
 }
 /* start of goal */
-void goal_menu(int has_goal){
+void goal_menu(Goal goal){
     title("GOAL");
 
-    if(has_goal){
-        // printf("[1]. ")
+    if(goal.name){
+        // double goal_progress = get_goal_progress(goal.amount);
+        strip(strlen(goal.name), goal.name);
+        printf("%s: %d\n", goal.name, goal.amount);
+        printf("Target Date: %s\n\n", goal.date);
+        // printf("Progress: %.2lf%%", goal_progress);
+
+        printf("[1]. Invest Money\n");
+        printf("[2]. Take Money\n");
+        printf("[3]. Remove Goal\n");
+        printf("[4]. Go Back\n");
     }
-    else if(!has_goal){
+    else if(!goal.name){
         printf("Goal isn't set yet.\n\n");
         
         printf("[1]. Set Goal\n");
@@ -152,4 +162,10 @@ void invalid_goal_input(char *mode){
     else{
         printf("Invalid goal input mode\n");
     }
+}
+
+void print_goal(Goal goal){
+    printf("Goal Name: %s\n", goal.name);
+    printf("Target Amount: %d\n", goal.amount);
+    printf("Target Date: %s\n\n", goal.date);
 }

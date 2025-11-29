@@ -324,18 +324,28 @@ char *get_date(){
 Goal get_goal(char *path){
     FILE *file = fopen(path, "r");
     char buffer[255];
-    Goal goal = {0, NULL}; // initialize all to null for error handling
-    for(int i = 0; i < 2; i++){
+    Goal goal = {NULL, 0, NULL}; // initialize all to null for error handling
+    for(int i = 0; i < 3; i++){
         if(fgets(buffer, sizeof(buffer), file) == NULL){break;}
         switch(i){
-            case 0: goal.amount = atoi(strdup(buffer)); break;
-            case 1: goal.date = strdup(buffer); break;
+            case 0: goal.name = strdup(buffer); break;
+            case 1: goal.amount = atoi(strdup(buffer)); break;
+            case 2: goal.date = strdup(buffer); break;
         }
     }
     fclose(file);
     return goal;
 }
 
+char *get_goal_name(){
+    char *name = malloc(255);
+    while(1){
+        printf("Set goal name: ");
+        fgets(name, 255, stdin);
+        strip(strlen(name), name);
+        return name;
+    }
+}
 
 int get_goal_amount(){
 int amount;
@@ -364,3 +374,35 @@ char *get_goal_date(){
     strip(strlen(date), date);
     return date;
 }
+/* int get_goal_progress(int amount, int investment){
+    double progress = (amount /)
+} */
+
+int confirm_goal_removal(Goal goal){
+    int choice = 0;
+    char c;
+    while(1){
+        printf("Are you sure you want to remove your goal? (y/n): ");
+        if(scanf(" %c", &c) != 1){
+            flush();
+            clear();
+            invalid_input();
+            title("Remove Goal");
+            print_goal(goal);
+            continue;
+        }
+        else if(c == 'n' || c == 'N'){break;}
+        else if(c == 'y' || c == 'Y'){choice = 1; break;}
+        else{
+            clear();
+            invalid_input();
+            title("Remove Goal");
+            print_goal(goal);
+            continue;
+        }
+    }
+    getchar();
+    return choice;
+}
+
+

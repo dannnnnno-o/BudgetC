@@ -1,6 +1,6 @@
 #ifndef VIEW_H
 #define VIEW_H
-
+#include "../goal.h"
 void clear();
 
 /* loading pages */
@@ -15,8 +15,11 @@ void add_menu();
 void spend_menu();
 void history_menu();
 
-void goal_menu(int has_goal);
+void goal_menu(Goal goal);
 void set_goal_menu();
+void print_goal(Goal goal);
+
+
 
 void logout();
 
