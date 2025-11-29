@@ -1,3 +1,4 @@
 laptop
 7000
 sometime later
+0

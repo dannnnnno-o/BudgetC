@@ -5,6 +5,7 @@ typedef struct{
     char *name;
     int amount;
     char *date;
+    int investment;
 } Goal;
 
 

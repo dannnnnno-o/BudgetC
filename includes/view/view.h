@@ -18,6 +18,7 @@ void history_menu();
 void goal_menu(Goal goal);
 void set_goal_menu();
 void print_goal(Goal goal);
+void print_goal_progress(int investment, int amount);
 
 
 

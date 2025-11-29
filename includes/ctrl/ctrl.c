@@ -324,13 +324,14 @@ char *get_date(){
 Goal get_goal(char *path){
     FILE *file = fopen(path, "r");
     char buffer[255];
-    Goal goal = {NULL, 0, NULL}; // initialize all to null for error handling
-    for(int i = 0; i < 3; i++){
+    Goal goal = {NULL, 0, NULL, 0}; // initialize all to null for error handling
+    for(int i = 0; i < 4; i++){
         if(fgets(buffer, sizeof(buffer), file) == NULL){break;}
         switch(i){
             case 0: goal.name = strdup(buffer); break;
             case 1: goal.amount = atoi(strdup(buffer)); break;
             case 2: goal.date = strdup(buffer); break;
+            case 3: goal.investment = atoi(strdup(buffer)); break;
         }
     }
     fclose(file);
@@ -374,9 +375,13 @@ char *get_goal_date(){
     strip(strlen(date), date);
     return date;
 }
-/* int get_goal_progress(int amount, int investment){
-    double progress = (amount /)
-} */
+float get_goal_progress(int investment, int amount){
+    if(!investment){
+        return 0;
+    }
+    float progress = ((investment/amount) * 100);
+    return progress;
+}
 
 int confirm_goal_removal(Goal goal){
     int choice = 0;

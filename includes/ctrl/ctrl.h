@@ -19,7 +19,7 @@ Goal get_goal(char *path);
 char *get_goal_name();
 int get_goal_amount();
 char *get_goal_date();
-int get_goal_progress(int amount);
+float get_goal_progress(int investment, int amount);
 
 int confirm_goal_removal(Goal goal);
 

@@ -91,11 +91,13 @@ void goal_menu(Goal goal){
     title("GOAL");
 
     if(goal.name){
-        // double goal_progress = get_goal_progress(goal.amount);
+        double goal_progress = get_goal_progress(goal.investment, goal.amount);
         strip(strlen(goal.name), goal.name);
+        
         printf("%s: %d\n", goal.name, goal.amount);
-        printf("Target Date: %s\n\n", goal.date);
-        // printf("Progress: %.2lf%%", goal_progress);
+        printf("Target Date: %s", goal.date);
+
+        printf("Progress: %.2lf%%\n\n", goal_progress);
 
         printf("[1]. Invest Money\n");
         printf("[2]. Take Money\n");
@@ -112,6 +114,7 @@ void goal_menu(Goal goal){
         printf("Invalid goal_menu() mode.");
     }
 }
+
 
 void set_goal_menu(){
 

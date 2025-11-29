@@ -141,7 +141,7 @@ break;
 case 3: //GOAL
 Goal goal;
 int goal_choice;
-Goal goal_buf = {NULL, 0, NULL};
+Goal goal_buf = {NULL, 0, NULL, 0};
 
 while(1){
     goal = get_goal(GOAL_PATH);
