@@ -340,7 +340,7 @@ Goal get_goal(char *path){
 char *get_goal_name(){
     char *name = malloc(255);
     while(1){
-        printf("Set goal name: ");
+        printf("What are you saving for?: ");
         fgets(name, 255, stdin);
         strip(strlen(name), name);
         return name;

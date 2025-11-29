@@ -139,77 +139,85 @@ while(1){
 break;
 
 case 3: //GOAL
-Goal goal = get_goal(GOAL_PATH);
+Goal goal;
 int goal_choice;
 Goal goal_buf = {NULL, 0, NULL};
-clear();
-goal_menu(goal);
-if(goal.amount){
-    goal_choice = get_choice("goal");
+
+while(1){
+    goal = get_goal(GOAL_PATH);
+    clear();
+
+    goal_menu(goal);
+    if(goal.amount){
+        goal_choice = get_choice("goal");
+}
     switch(goal_choice){
         case 1: //invest money
         case 2: //take money
         case 3: 
-        clear();
-        title("Remove Goal");
-        print_goal(goal);
-        int goal_removal = confirm_goal_removal(goal);
-        if(goal_removal){
-            remove_goal(GOAL_PATH);
             clear();
-            loading(0, "Removing goal", 3);
-            clear();
-            printf("Goal removed.\n\n");
-            printf("Press enter to continue.\n");
-            wait_for_enter();
-            clear();
-            home = 'y'; 
-            break;
-        }
-        else if(!goal_removal){
-            clear();
-            loading(0, "Cancelling process", 3);
-            clear();
-            printf("Process cancelled.\n\n");
-            printf("Press enter to continue.\n");
-            wait_for_enter();
-            clear();
-            home = 'y'; break;
-        }
-
+            title("Remove Goal");
+            print_goal(goal);
+            int goal_removal = confirm_goal_removal(goal);
+            if(goal_removal){
+                remove_goal(GOAL_PATH);
+                clear();
+                loading(0, "Removing goal", 3);
+                clear();
+                printf("Goal removed.\n\n");
+                printf("Press enter to continue.\n");
+                wait_for_enter();
+                clear();
+                goal_choice = 0;
+                break;
+            }
+            else if(!goal_removal){
+                clear();
+                loading(0, "Cancelling process", 3);
+                clear();
+                printf("Process cancelled.\n\n");
+                printf("Press enter to continue.\n");
+                wait_for_enter();
+                clear();
+                goal_choice = 0;
+                break;
+            }
         break;
        
         case 4: home = 'y'; break;
     }
-}
-    if(home == 'y'){clear();break;}
+    if(home == 'y'){clear(); break;}
 
     if(!goal.amount){
 
-    goal_choice = get_choice("no_goal");
-    clear();
+        goal_choice = get_choice("no_goal");
+        clear();
+        if(goal_choice == 1){
+            title("Set Goal");
+            goal_buf.name = get_goal_name();           //get goal details
+            goal_buf.amount = get_goal_amount();
+            goal_buf.date = get_goal_date();
 
-    if(goal_choice == 2){   // return home
-        break;
+            if(update_goal(GOAL_PATH, goal_buf)){
+                printf("Can't update goal\n");
+            }
+            printf("\n");
+            loading(0, "Updating goal", 3);
+            clear();
+            title("GOAL UPDATED!");
+            printf("Press enter to return.\n");
+            wait_for_enter();
+            goal_choice = 0;
+            continue;
+
+        }
+        else if(goal_choice == 2){   // return home
+            break;
+        }
     }
-
-    title("Set Goal");
-    goal_buf.name = get_goal_name();           //get goal details
-    goal_buf.amount = get_goal_amount();
-    goal_buf.date = get_goal_date();
+    continue;
 }
-    if(update_goal(GOAL_PATH, goal_buf)){
-        printf("Can't update goal\n");
-    }
-    printf("\n");
-    loading(0, "Updating goal", 3);
-    clear();
-    title("GOAL UPDATED!");
-    printf("Press enter to return.\n");
-    wait_for_enter();
     break;
-
-break;
 
 case 4:
     clear();
