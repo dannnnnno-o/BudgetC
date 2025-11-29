@@ -77,10 +77,10 @@ if(strcmp(mode, "landing_page") == 0){
 /* update balance */
 if(strcmp(mode, "update_balance") == 0){
         while(1){
-        update_balance_menu();
         if((scanf("%d", &choice) != 1) || (choice <= 0 || choice > 3)){
         clear();
         invalid_choice(3);
+        update_balance_menu();
         flush();
         continue;
         }

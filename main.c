@@ -153,8 +153,10 @@ while(1){
 }
     switch(goal_choice){
         case 1: //invest money
-        case 2: //take money
-        case 3: 
+            printf("Invest money.\n"); break;
+            case 2: //take money
+            printf("Take money.\n"); break;
+        case 3: // remove goal
             clear();
             title("Remove Goal");
             print_goal(goal);
