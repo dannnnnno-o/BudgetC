@@ -30,6 +30,6 @@ void invalid_input();
 void invalid_choice(int limit);
 void invalid_balance_update(char *mode);
 void invalid_goal_input(char *mode);
-
+void invalid_invest(char *mode);
 
 #endif

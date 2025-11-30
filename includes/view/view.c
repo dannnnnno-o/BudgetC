@@ -91,7 +91,7 @@ void goal_menu(Goal goal){
     title("GOAL");
 
     if(goal.name){
-        double goal_progress = get_goal_progress(goal.investment, goal.amount);
+        float goal_progress = get_goal_progress(goal.investment, goal.amount);
         strip(strlen(goal.name), goal.name);
         strip(strlen(goal.date), goal.date);
         
@@ -114,9 +114,10 @@ void goal_menu(Goal goal){
     }
 }
 
-
-void set_goal_menu(){
-
+void print_goal(Goal goal){
+    printf("Goal Name: %s\n", goal.name);
+    printf("Target Amount: %d\n", goal.amount);
+    printf("Target Date: %s\n\n", goal.date);
 }
 
 /* end of goal */
@@ -166,8 +167,22 @@ void invalid_goal_input(char *mode){
     }
 }
 
-void print_goal(Goal goal){
-    printf("Goal Name: %s\n", goal.name);
-    printf("Target Amount: %d\n", goal.amount);
-    printf("Target Date: %s\n\n", goal.date);
+void invalid_invest(char *mode){
+    if(strcmp(mode, "invalid") == 0){
+        printf("Please enter a valid amount.\n");
+    }
+    else if(strcmp(mode, "negative") == 0){
+        printf("You can't invest a negative amount.\n");
+    }
+    else if(strcmp(mode, "zero") == 0){
+        printf("You can't invest nothing.\n");
+    }
+    else if(strcmp(mode, "insufficient_bal") == 0){
+        printf("You don't have enough balance to invest that amount.\n");
+    }
+    else{
+        printf("Invalid investment mode");
+    }
 }
+
+

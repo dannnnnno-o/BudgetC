@@ -114,3 +114,26 @@ void view_transactions(char *mode, char *history_path){
     fclose(file);
 }
 
+void update_investment(char *path, Goal goal, int investment, char *bal_path, char *history, char *goal_history){
+    int current_balance = get_balance();
+    char *date;
+    date = get_date();
+
+    FILE *goal_file = fopen(path, "w");
+    fprintf(goal_file, "%s\n%d\n%s\n%d", goal.name, goal.amount, goal.date, investment);
+    fclose(goal_file);
+
+    FILE *balance = fopen(bal_path, "w");
+    fprintf(balance, "%d", current_balance - investment);
+    fclose(balance);
+
+    FILE *history_file = fopen(history, "a");
+    fprintf(history_file, "%s | - %d: Invested on goal \"%s\".", date, investment, goal.name);
+    fclose(history_file);
+
+    FILE *goal_history_file = fopen(goal_history, "a");
+    fprintf(goal_history_file, "%s | - %d: Invested on goal \"%s\".", date, investment, goal.name);
+    fclose(goal_history_file);
+
+}
+

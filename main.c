@@ -14,6 +14,7 @@
 #define BAL_PATH "includes/db/balance.txt"
 #define HISTORY_PATH "includes/db/history.txt"
 #define GOAL_PATH "includes/db/goal.txt"
+#define GOAL_HISTORY "includes/db/goal_history.txt"
 #define COMMENT_SIZE 256
 
 int main(){
@@ -143,6 +144,8 @@ Goal goal;
 int goal_choice;
 Goal goal_buf = {NULL, 0, NULL, 0};
 
+int investment = 0;
+int invest_confirm = 0;
 while(1){
     goal = get_goal(GOAL_PATH);
     clear();
@@ -153,7 +156,28 @@ while(1){
 }
     switch(goal_choice){
         case 1: //invest money
-            printf("Invest money.\n"); break;
+            clear();
+            title("Invest Money");
+            investment = invest(current_balance);
+            if(!investment){break;}
+            invest_confirm = confirm_investment(investment);
+            if(invest_confirm){
+                clear();
+                loading(0, "Updating investment", 3);
+                update_investment(GOAL_PATH, goal, investment + goal.investment, BAL_PATH, HISTORY_PATH, GOAL_HISTORY);
+                printf("\nInvestment Success!\n");
+            }
+            else if(!invest_confirm){
+                clear();
+                loading(0, "Cancelling process", 3);
+                printf("\nProcess cancelled.\n");
+            }
+            printf("Press enter to proceed.\n");
+            wait_for_enter();
+
+            break; // end of invest money
+
+
             case 2: //take money
             printf("Take money.\n"); break;
         case 3: // remove goal

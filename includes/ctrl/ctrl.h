@@ -22,6 +22,7 @@ char *get_goal_date();
 float get_goal_progress(int investment, int amount);
 
 int confirm_goal_removal(Goal goal);
-
+int invest(int bal);
+int confirm_investment(int investment);
 
 #endif

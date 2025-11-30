@@ -379,7 +379,7 @@ float get_goal_progress(int investment, int amount){
     if(!investment){
         return 0;
     }
-    float progress = ((investment/amount) * 100);
+    float progress = (((float)investment/(float)amount) * 100);
     return progress;
 }
 
@@ -408,6 +408,77 @@ int confirm_goal_removal(Goal goal){
     }
     getchar();
     return choice;
+}
+
+int invest(int bal){
+int investment = 0;
+if(!bal){
+    title("Invest Money");
+    printf("You don't have any balance to invest.\n\n");
+    printf("Press enter to go back.\n");
+    wait_for_enter();
+    return 0;
+}
+while(1){
+    printf("How much would you like to invest?: ");
+    if(scanf("%d", &investment) != 1){
+        flush();
+        clear();
+        title("Invest Money");
+        invalid_invest("invalid");
+        continue;
+    }
+    else if(investment < 0){
+        clear();
+        title("Invest Money");
+        invalid_invest("negative");
+        continue;
+    }
+
+    else if(investment == 0){
+        clear();
+        title("Invest Money");
+        invalid_invest("zero");
+        continue;
+    }
+
+    else if(investment > bal){
+        clear();
+        title("Invest Money");
+        invalid_invest("insufficient_bal");
+        continue;
+    }
+    break;
+}
+return investment;
+}
+
+int confirm_investment(int investment){
+    int choice = 0;
+    char c;
+    while(1){
+        printf("Are you sure you want to invest %dPHP? (y/n): ", investment);
+        if(scanf(" %c", &c) != 1){
+            flush();
+            clear();
+            invalid_input();
+        }
+
+        else if(c == 'y' || c == 'Y'){choice = 1; break;}
+
+        else if(c == 'n' || c == 'N'){break;}
+
+        else{
+            clear();
+            invalid_input();
+        }
+
+        title("Invest Money");
+        printf("How much would you like to invest?: %d", investment);
+        continue;
+    }
+    getchar();
+return choice; 
 }
 
 
