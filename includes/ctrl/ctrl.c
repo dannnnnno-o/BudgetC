@@ -197,33 +197,34 @@ if(strcmp(mode, "no_goal") == 0){
 return choice;
 }
 
-int get_update_value(){
+int get_update_value(char mode){
 int value = 0;
 while(1){
     if(scanf("%d", &value) != 1){
         clear();
         invalid_balance_update("string");
         flush();
-        add_menu();
-        continue;
     }
     else if(value < 0){
         clear();
         invalid_balance_update("negative");
         flush();
-        add_menu();
-        continue;
     }
     else if(value == 0){
         clear();
         invalid_balance_update("zero");
         flush();
-        add_menu();
-        continue;
     }
     else{
         break;
     }
+    if(mode == '+'){
+        add_menu();
+    }
+    else if(mode == '-'){
+        spend_menu();
+    }
+    continue;
 }
 return value;
 }
@@ -264,7 +265,12 @@ while(1){
 
 else if(!comment){
 while(1){
-    printf("Add: %d\n", bal_buffer);
+    if(mode == '+'){
+        printf("Add: %d\n", bal_buffer);
+    }
+    else if(mode == '-'){
+        printf("Spend %d\n", bal_buffer);
+    }
     printf("Comment: no comment.\n\n");
     printf("Are you sure you want to update your balance? (y/n): ");
 

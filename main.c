@@ -66,7 +66,7 @@ while(1){
     }
     if(home == 'y'){break;}; 
 
-    bal_buffer = get_update_value();
+    bal_buffer = get_update_value(update_mode);
     clear();
 
     comment_choice = get_choice("comment");

@@ -1,3 +1,0 @@
-12-5-25 | + 100: sample balance lang for goal
-12-5-25 | - 1: Invested on goal "GTX 1650TI".
-12-5-25 | - 2: Invested on goal "GTX 1650TI".
