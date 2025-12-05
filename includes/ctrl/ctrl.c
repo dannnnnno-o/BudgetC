@@ -457,7 +457,7 @@ int confirm_investment(int investment){
     int choice = 0;
     char c;
     while(1){
-        printf("Are you sure you want to invest %dPHP? (y/n): ", investment);
+        printf("\nAre you sure you want to invest %dPHP?\nThis will be deducted to your current balance. (y/n): ", investment);
         if(scanf(" %c", &c) != 1){
             flush();
             clear();

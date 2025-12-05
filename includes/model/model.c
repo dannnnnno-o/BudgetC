@@ -108,7 +108,7 @@ void view_transactions(char *mode, char *history_path){
         }
     }
     else{
-        printf("invalid transaction mode.\n");
+        printf("Invalid transaction mode.\n");
     }
 
     fclose(file);
@@ -128,12 +128,11 @@ void update_investment(char *path, Goal goal, int investment, char *bal_path, ch
     fclose(balance);
 
     FILE *history_file = fopen(history, "a");
-    fprintf(history_file, "%s | - %d: Invested on goal \"%s\".", date, investment, goal.name);
+    fprintf(history_file, "%s | - %d: Invested on goal \"%s\".\n", date, investment, goal.name);
     fclose(history_file);
 
     FILE *goal_history_file = fopen(goal_history, "a");
-    fprintf(goal_history_file, "%s | - %d: Invested on goal \"%s\".", date, investment, goal.name);
+    fprintf(goal_history_file, "%s | - %d: Invested on goal \"%s\".\n", date, investment, goal.name);
     fclose(goal_history_file);
-
 }
 

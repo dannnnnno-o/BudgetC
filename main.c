@@ -164,8 +164,10 @@ while(1){
             if(invest_confirm){
                 clear();
                 loading(0, "Updating investment", 3);
-                update_investment(GOAL_PATH, goal, investment + goal.investment, BAL_PATH, HISTORY_PATH, GOAL_HISTORY);
+                clear();
+                update_investment(GOAL_PATH, goal, investment, BAL_PATH, HISTORY_PATH, GOAL_HISTORY);
                 printf("\nInvestment Success!\n");
+                
             }
             else if(!invest_confirm){
                 clear();
