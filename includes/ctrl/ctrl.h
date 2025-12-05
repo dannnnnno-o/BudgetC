@@ -15,7 +15,6 @@ char *get_comment();
 void wait_for_enter();
 char *get_date();
 
-Goal get_goal(char *path);
 char *get_goal_name();
 int get_goal_amount();
 char *get_goal_date();
@@ -24,5 +23,7 @@ float get_goal_progress(int investment, int amount);
 int confirm_goal_removal(Goal goal);
 int invest(int bal);
 int confirm_investment(int investment);
+
+int take_investment(int goal_investment);
 
 #endif

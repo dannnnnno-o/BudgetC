@@ -15,9 +15,9 @@ void add_menu();
 void spend_menu();
 void history_menu();
 
-void goal_menu(Goal goal);
+void print_goal();
+void goal_menu();
 void set_goal_menu();
-void print_goal(Goal goal);
 void print_goal_progress(int investment, int amount);
 
 
@@ -31,5 +31,6 @@ void invalid_choice(int limit);
 void invalid_balance_update(char *mode);
 void invalid_goal_input(char *mode);
 void invalid_invest(char *mode);
+void invalid_take_investment(char *mode);
 
 #endif

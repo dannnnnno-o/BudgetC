@@ -146,11 +146,13 @@ Goal goal_buf = {NULL, 0, NULL, 0};
 
 int investment = 0;
 int invest_confirm = 0;
+int take_invest = 0;
+
 while(1){
-    goal = get_goal(GOAL_PATH);
+    goal = get_goal();
     clear();
 
-    goal_menu(goal);
+    goal_menu();
     if(goal.amount){
         goal_choice = get_choice("goal");
 }
@@ -164,7 +166,7 @@ while(1){
                 clear();
                 loading(0, "Updating investment", 3);
                 clear();
-                update_investment(GOAL_PATH, goal, investment, BAL_PATH, HISTORY_PATH, GOAL_HISTORY);
+                update_investment(GOAL_PATH, goal, investment, BAL_PATH, HISTORY_PATH, GOAL_HISTORY, '+');
                 printf("\nInvestment Success!\n");
                 
             }
@@ -182,20 +184,29 @@ while(1){
             case 2: //take money
             clear();
             title("TAKE INVESTMENT");
+            print_goal();
             if(!goal.investment){
                 printf("You have no investment to take back.\n\n");
-                printf("Press enter to continue. ");
-                wait_for_enter();
-                break;
             }
-            
-            printf("Take investment.\n"); wait_for_enter(); break;
+            else{
+                printf("How much would you like to take?: ");
+                take_invest = take_investment(goal.investment);
+                clear();
+                loading(0, "Updating goal", 3);
+                clear();
+                update_investment(GOAL_PATH, goal, take_invest, BAL_PATH, HISTORY_PATH, GOAL_HISTORY, '-');
+                printf("\n%d was added to your balance.\n", take_invest);
+            }
+
+            printf("Press enter to continue. ");
+            wait_for_enter();
+            break;
             
 
         case 3: // remove goal
             clear();
             title("Remove Goal");
-            print_goal(goal);
+            print_goal();
             int goal_removal = confirm_goal_removal(goal);
             if(goal_removal){
                 remove_goal(GOAL_PATH);
@@ -206,7 +217,6 @@ while(1){
                 printf("Press enter to continue.\n");
                 wait_for_enter();
                 clear();
-                goal_choice = 0;
                 break;
             }
             else if(!goal_removal){
@@ -217,13 +227,14 @@ while(1){
                 printf("Press enter to continue.\n");
                 wait_for_enter();
                 clear();
-                goal_choice = 0;
                 break;
             }
+
         break;
        
         case 4: home = 'y'; break;
     }
+    goal_choice = 0;
     if(home == 'y'){clear(); break;}
 
     if(!goal.amount){

@@ -87,17 +87,22 @@ void history_menu(){
     printf("What transactions would you like to see?: ");
 }
 /* start of goal */
-void goal_menu(Goal goal){
+
+void print_goal(){
+    Goal goal = get_goal();
+    strip(strlen(goal.name), goal.name);
+    strip(strlen(goal.date), goal.date);
+    float goal_progress = get_goal_progress(goal.investment, goal.amount);
+
+    printf("%s: %dPHP                     Invested Amount: %dPHP\n", goal.name, goal.amount, goal.investment);
+    printf("Target Date: %s            Progress: %.2f%%\n\n", goal.date, goal_progress);
+}
+void goal_menu(){
+    Goal goal = get_goal();
     title("GOAL");
+    print_goal();
 
     if(goal.name){
-        float goal_progress = get_goal_progress(goal.investment, goal.amount);
-        strip(strlen(goal.name), goal.name);
-        strip(strlen(goal.date), goal.date);
-        
-        printf("%s: %dPHP                     Invested Amount: %dPHP\n", goal.name, goal.amount, goal.investment);
-        printf("Target Date: %s         Progress: %.2f%%\n\n", goal.date, goal_progress);
-
         printf("[1]. Invest Money\n");
         printf("[2]. Take Investment\n");
         printf("[3]. Remove Goal\n");
@@ -112,12 +117,6 @@ void goal_menu(Goal goal){
     else{
         printf("Invalid goal_menu() mode.");
     }
-}
-
-void print_goal(Goal goal){
-    printf("Goal Name: %s\n", goal.name);
-    printf("Target Amount: %d\n", goal.amount);
-    printf("Target Date: %s\n\n", goal.date);
 }
 
 /* end of goal */
@@ -185,4 +184,21 @@ void invalid_invest(char *mode){
     }
 }
 
+void invalid_take_investment(char *mode){
+    if(strcmp(mode, "invalid") == 0){
+        printf("Please enter a valid number.\n");
+    }
+    else if(strcmp(mode, "negative") == 0){
+        printf("You can't take a negative amount.\n");
+    }
+    else if(strcmp(mode, "zero") == 0){
+        printf("Please can't take nothing.\n");
+    }
+    else if(strcmp(mode, "insufficient_investment") == 0){
+        printf("You don't have enough investment for that amount.\n");
+    }
+    else{
+        printf("Invalid investment take mode.\n");
+    }
+}
 

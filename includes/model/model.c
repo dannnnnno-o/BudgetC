@@ -51,6 +51,23 @@ int update_account(char mode, int current_balance, int bal_buffer, char *comment
     return 0;
 }
 
+Goal get_goal(){
+    FILE *file = fopen("includes/db/goal.txt", "r");
+    char buffer[255];
+    Goal goal = {NULL, 0, NULL, 0}; // initialize all to null for error handling
+    for(int i = 0; i < 4; i++){
+        if(fgets(buffer, sizeof(buffer), file) == NULL){break;}
+        switch(i){
+            case 0: goal.name = strdup(buffer); break;
+            case 1: goal.amount = atoi(strdup(buffer)); break;
+            case 2: goal.date = strdup(buffer); break;
+            case 3: goal.investment = atoi(strdup(buffer)); break;
+        }
+    }
+    fclose(file);
+    return goal;
+}
+
 int update_goal(char *path, Goal goal){
     FILE *file = fopen(path, "w");
         if (fprintf(file, "%s\n%d\n%s", goal.name, goal.amount, goal.date ) < 0) {
@@ -114,25 +131,32 @@ void view_transactions(char *mode, char *history_path){
     fclose(file);
 }
 
-void update_investment(char *path, Goal goal, int investment, char *bal_path, char *history, char *goal_history){
+void update_investment(char *path, Goal goal, int investment, char *bal_path, char *history, char *goal_history, char mode){
     int current_balance = get_balance();
     char *date;
     date = get_date();
 
-    FILE *goal_file = fopen(path, "w");
-    fprintf(goal_file, "%s\n%d\n%s\n%d", goal.name, goal.amount, goal.date, investment);
-    fclose(goal_file);
-
+    FILE *goal_file = fopen(path, "w"); 
     FILE *balance = fopen(bal_path, "w");
-    fprintf(balance, "%d", current_balance - investment);
-    fclose(balance);
-
     FILE *history_file = fopen(history, "a");
-    fprintf(history_file, "%s | - %d: Invested on goal \"%s\".\n", date, investment, goal.name);
-    fclose(history_file);
-
     FILE *goal_history_file = fopen(goal_history, "a");
-    fprintf(goal_history_file, "%s | - %d: Invested on goal \"%s\".\n", date, investment, goal.name);
+
+    if(mode == '+'){
+ 
+        fprintf(goal_file, "%s\n%d\n%s\n%d", goal.name, goal.amount, goal.date, investment);
+        fprintf(balance, "%d", current_balance - investment);
+        fprintf(history_file, "%s | + %d: Invested on goal \"%s\".\n", date, investment, goal.name);
+        fprintf(goal_history_file, "%s | - %d: Invested on goal \"%s\".\n", date, investment, goal.name);
+    }
+
+    else if(mode == '-'){
+        fprintf(goal_file, "%s%d\n%s%d", goal.name, goal.amount, goal.date, goal.investment - investment);
+        fprintf(balance, "%d", current_balance + investment);
+        fprintf(history_file, "%s | - %d: Taken from investments \"%s\".\n", date, investment, goal.name);
+        fprintf(goal_history_file, "%s | + %d: Taken from investments \"%s\".\n", date, investment, goal.name);
+    }
+    fclose(goal_file);
+    fclose(balance);
+    fclose(history_file);
     fclose(goal_history_file);
 }
-

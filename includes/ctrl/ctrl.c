@@ -8,6 +8,12 @@
 
 #include "ctrl.h"
 #include "../view/view.h"
+#include "../model/model.h"
+#include "../goal.h"
+
+#define GOAL_PATH "../goal.h"
+
+
 
 
 void flush(){
@@ -55,14 +61,14 @@ if(strcmp(mode, "landing_page") == 0){
     while(1){
         if(scanf("%d", &choice) != 1){
             clear();
-            invalid_choice(5);
+            invalid_choice(4);
             menu();
             flush();
             continue;    
         }
-        if(choice <= 0 || choice > 5){
+        if(choice <= 0 || choice > 4){
             clear();
-            invalid_choice(5);
+            invalid_choice(4);
             menu();
             flush();
             continue;
@@ -163,11 +169,12 @@ while(1){
 if(strcmp(mode, "goal") == 0){
     while(1){
         printf("What would you like to do?: ");
-        if((scanf("%d", &choice) != 1) || (choice <= 0 || choice > 5)){
+        if((scanf("%d", &choice) != 1) || (choice <= 0 || choice > 4)){
             clear();
-            invalid_choice(5);
+            invalid_choice(4);
             //men
             flush();
+            // goal_menu()
             continue;
         }
         else{
@@ -327,22 +334,7 @@ char *get_date(){
     return strdup(date);
 }
 
-Goal get_goal(char *path){
-    FILE *file = fopen(path, "r");
-    char buffer[255];
-    Goal goal = {NULL, 0, NULL, 0}; // initialize all to null for error handling
-    for(int i = 0; i < 4; i++){
-        if(fgets(buffer, sizeof(buffer), file) == NULL){break;}
-        switch(i){
-            case 0: goal.name = strdup(buffer); break;
-            case 1: goal.amount = atoi(strdup(buffer)); break;
-            case 2: goal.date = strdup(buffer); break;
-            case 3: goal.investment = atoi(strdup(buffer)); break;
-        }
-    }
-    fclose(file);
-    return goal;
-}
+
 
 char *get_goal_name(){
     char *name = malloc(255);
@@ -399,7 +391,7 @@ int confirm_goal_removal(Goal goal){
             clear();
             invalid_input();
             title("Remove Goal");
-            print_goal(goal);
+            print_goal();
             continue;
         }
         else if(c == 'n' || c == 'N'){break;}
@@ -408,7 +400,7 @@ int confirm_goal_removal(Goal goal){
             clear();
             invalid_input();
             title("Remove Goal");
-            print_goal(goal);
+            print_goal();
             continue;
         }
     }
@@ -487,4 +479,42 @@ int confirm_investment(int investment){
 return choice; 
 }
 
+int take_investment(int goal_investment){
+clear();
+int to_take;
+while(1){
+    title("TAKE INVESTMENT");
+    print_goal();
+    printf("How much would you like to take?: ");
+
+    if(scanf("%d", &to_take) != 1){
+        clear();
+        invalid_take_investment("invalid");
+        flush();
+        continue;
+    }
+    else if(to_take < 0){
+        clear();
+        invalid_take_investment("negative");
+        flush();
+        continue;
+    }
+    else if(to_take == 0){
+        clear();
+        invalid_take_investment("zero");
+        flush();
+        continue;
+    }
+    else if(to_take > goal_investment){
+        clear();
+        invalid_take_investment("insufficient_investment");
+        flush();
+        continue;
+    }
+    else{
+        getchar();
+        return to_take;
+    }
+}
+}
 
