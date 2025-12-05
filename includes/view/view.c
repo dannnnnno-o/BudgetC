@@ -99,7 +99,7 @@ void goal_menu(Goal goal){
         printf("Target Date: %s         Progress: %.2f%%\n\n", goal.date, goal_progress);
 
         printf("[1]. Invest Money\n");
-        printf("[2]. Take Money\n");
+        printf("[2]. Take Investment\n");
         printf("[3]. Remove Goal\n");
         printf("[4]. Go Back\n");
     }

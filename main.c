@@ -157,7 +157,6 @@ while(1){
     switch(goal_choice){
         case 1: //invest money
             clear();
-            title("Invest Money");
             investment = invest(current_balance);
             if(!investment){break;}
             invest_confirm = confirm_investment(investment);
@@ -173,15 +172,26 @@ while(1){
                 clear();
                 loading(0, "Cancelling process", 3);
                 printf("\nProcess cancelled.\n");
+                clear();
             }
             printf("Press enter to proceed.\n");
             wait_for_enter();
-
             break; // end of invest money
 
 
             case 2: //take money
-            printf("Take money.\n"); break;
+            clear();
+            title("TAKE INVESTMENT");
+            if(!goal.investment){
+                printf("You have no investment to take back.\n\n");
+                printf("Press enter to continue. ");
+                wait_for_enter();
+                break;
+            }
+            
+            printf("Take investment.\n"); wait_for_enter(); break;
+            
+
         case 3: // remove goal
             clear();
             title("Remove Goal");

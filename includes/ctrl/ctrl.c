@@ -418,8 +418,8 @@ int confirm_goal_removal(Goal goal){
 
 int invest(int bal){
 int investment = 0;
+title("Invest Money");
 if(!bal){
-    title("Invest Money");
     printf("You don't have any balance to invest.\n\n");
     printf("Press enter to go back.\n");
     wait_for_enter();
