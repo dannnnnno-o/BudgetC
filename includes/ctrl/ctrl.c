@@ -174,7 +174,7 @@ if(strcmp(mode, "goal") == 0){
             invalid_choice(4);
             //men
             flush();
-            // goal_menu()
+            goal_menu();
             continue;
         }
         else{
@@ -518,3 +518,36 @@ while(1){
 }
 }
 
+int confirm_take_investment(int to_take){
+    int choice = 0;
+    char c;
+    while(1){
+        title("TAKE INVESTMENT");
+        print_goal();
+        printf("You're about to take %dPHP from your investments.\n", to_take);
+        printf("Are you sure? (y/n): ");
+
+        if(scanf(" %c", &c) != 1){
+            clear();
+            invalid_input();
+            flush();
+            continue;
+        }
+
+        else if(c == 'y' || c == 'Y'){
+            choice = 1;
+            break;
+        }
+        
+        else if(c == 'n' || c == 'N'){
+            break;
+        }
+        else{
+            clear();
+            invalid_input();
+            continue;
+        }
+    }
+getchar();
+return choice;
+}

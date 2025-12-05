@@ -147,6 +147,7 @@ Goal goal_buf = {NULL, 0, NULL, 0};
 int investment = 0;
 int invest_confirm = 0;
 int take_invest = 0;
+int confirm_take;
 
 while(1){
     goal = get_goal();
@@ -173,10 +174,9 @@ while(1){
             else if(!invest_confirm){
                 clear();
                 loading(0, "Cancelling process", 3);
-                printf("\nProcess cancelled.\n");
-                clear();
+                printf("\nProcess cancelled.\n\n");
             }
-            printf("Press enter to proceed.\n");
+            printf("Press enter to proceed. ");
             wait_for_enter();
             break; // end of invest money
 
@@ -192,12 +192,22 @@ while(1){
                 printf("How much would you like to take?: ");
                 take_invest = take_investment(goal.investment);
                 clear();
-                loading(0, "Updating goal", 3);
-                clear();
-                update_investment(GOAL_PATH, goal, take_invest, BAL_PATH, HISTORY_PATH, GOAL_HISTORY, '-');
-                printf("\n%d was added to your balance.\n", take_invest);
+                confirm_take = confirm_take_investment(take_invest);
+                if(confirm_take){
+                    clear();
+                    loading(0, "Updating goal", 3);
+                    clear();
+                    update_investment(GOAL_PATH, goal, take_invest, BAL_PATH, HISTORY_PATH, GOAL_HISTORY, '-');
+                    printf("\n%d was added to your balance.\n", take_invest);    
+                }
+                else{
+                    clear();
+                    loading(0, "Cancelling process", 3);
+                    clear();
+                    printf("Process cancelled.\n\n");
+                }
+                
             }
-
             printf("Press enter to continue. ");
             wait_for_enter();
             break;

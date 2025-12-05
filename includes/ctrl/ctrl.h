@@ -25,5 +25,5 @@ int invest(int bal);
 int confirm_investment(int investment);
 
 int take_investment(int goal_investment);
-
+int confirm_take_investment(int to_take);
 #endif
