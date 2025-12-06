@@ -100,8 +100,9 @@ void print_goal(){
 void goal_menu(){
     Goal goal = get_goal();
     title("GOAL");
-    print_goal();
-
+    if(goal.name){
+        print_goal();
+    }
     if(goal.name){
         printf("[1]. Invest Money\n");
         printf("[2]. Take Investment\n");
@@ -155,10 +156,10 @@ void invalid_input(){
 
 void invalid_goal_input(char *mode){
     if(strcmp(mode, "amount") == 0){
-        printf("Invalid target amount. Please enter a valid target amount.\n");
+        printf("Invalid target amount.\nPlease enter a valid target amount.\n");
     }
     else if(strcmp(mode, "date") == 0){
-        printf("Invalid target date. Please enter a valid target date\n");
+        printf("Invalid target date.\nPlease enter a valid target date\n");
     }
     
     else{

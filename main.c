@@ -156,7 +156,7 @@ while(1){
     goal_menu();
     if(goal.amount){
         goal_choice = get_choice("goal");
-}
+    }
     switch(goal_choice){
         case 1: //invest money
             clear();

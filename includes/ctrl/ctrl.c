@@ -190,6 +190,7 @@ if(strcmp(mode, "no_goal") == 0){
             clear();
             invalid_choice(2);
             flush();
+            goal_menu();
             continue;
         }
         else{

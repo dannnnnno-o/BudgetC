@@ -53,6 +53,15 @@ int update_account(char mode, int current_balance, int bal_buffer, char *comment
 
 Goal get_goal(){
     FILE *file = fopen("includes/db/goal.txt", "r");
+
+    if (file == NULL) {
+    perror("Error opening file");
+    }
+
+
+
+
+
     char buffer[255];
     Goal goal = {NULL, 0, NULL, 0}; // initialize all to null for error handling
     for(int i = 0; i < 4; i++){
