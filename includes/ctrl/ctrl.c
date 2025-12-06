@@ -322,7 +322,7 @@ void wait_for_enter(){
 }
 
 char *get_date(){
-    char date[32];
+    char date[255];
 
     time_t now = time(NULL);
     struct tm *local_time = localtime(&now);
@@ -331,7 +331,8 @@ char *get_date(){
     int month = local_time->tm_mon + 1;
     int year = local_time->tm_year - 100;
     
-    sprintf(date, "%d-%d-%d", month, day, year);
+    snprintf(date, sizeof(date), "%02d-%02d-%d", month, day, year);
+
     return strdup(date);
 }
 
