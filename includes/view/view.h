@@ -14,6 +14,7 @@ void update_balance_menu();
 void add_menu();
 void spend_menu();
 void history_menu();
+void print_transact_date(char *date);
 
 void print_goal();
 void goal_menu();

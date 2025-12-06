@@ -14,6 +14,8 @@ int confirm(char mode, int bal_buffer, int comment, char *comment_buffer);
 char *get_comment();
 void wait_for_enter();
 char *get_date();
+char *get_transact_date(char *transaction);
+
 
 char *get_goal_name();
 int get_goal_amount();

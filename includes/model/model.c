@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include "model.h"
 #include "../ctrl/ctrl.h"
+#include "../view/view.h"
 
 int get_balance(){
     FILE *balance = fopen("includes/db/balance.txt", "r");
@@ -97,13 +98,20 @@ void remove_goal(char *path){
 void view_transactions(char *mode, char *history_path){
     FILE *file = fopen(history_path, "r");
     char buffer[256];
+    char *curr_date;
+    char *next_date;
+    char *line;
     int i = 0;
 
-
     if(strcmp(mode, "all") == 0){
-        while(fgets(buffer, sizeof(buffer), file) != NULL){
+        line = fgets(buffer, sizeof(buffer), file);
+        while(line != NULL){
             i++;
-            printf("%s", buffer);
+            curr_date = get_transact_date(buffer); // get curr_date
+            line = fgets(buffer, sizeof(buffer), file); // get next_line
+            next_date = get_transact_date(buffer); //get next_date
+            if(strncmp(curr_date, next_date, 8) != 0){print_transact_date(next_date);} //print if curr != next
+            if(line != NULL){printf("%s", line + 10);} //print line if(line)
         }
         if(!i){
             printf("\nYou have not completed any transactions yet.\n");

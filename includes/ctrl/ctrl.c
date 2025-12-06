@@ -336,6 +336,12 @@ char *get_date(){
     return strdup(date);
 }
 
+char *get_transact_date(char *transaction){
+    char date[9];
+    return strdup(strncpy(date, transaction, 8));
+}
+
+
 
 
 char *get_goal_name(){
