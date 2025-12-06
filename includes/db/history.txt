@@ -1,2 +1,0 @@
-12-6-25 | + 200: sample balance lang
-12-6-25 | - 1: Invested on goal "GPU".
