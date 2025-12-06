@@ -160,22 +160,6 @@ void invalid_input(){
     printf("Invalid input. Try again.\n\n");
 }
 
-void history_menu(){
-    title("HISTORY");
-    printf("[1]. All\n");
-    printf("[2]. Added\n");
-    printf("[3]. Spent\n");
-    printf("[4]. Go Back\n");
-    printf("What transactions would you like to see?: ");
-}
-
-void print_transact_date(char *date){
-    printf("\n\n");
-    printf("--------------\n");
-    printf("|| %s ||\n", date);
-    printf("--------------\n");
-}
-
 
 void invalid_goal_input(char *mode){
     if(strcmp(mode, "amount") == 0){
