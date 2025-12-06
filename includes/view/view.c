@@ -6,6 +6,7 @@
 #include "view.h"
 #include "../ctrl/ctrl.h"
 #include "../model/model.h"
+#include "../goal.h"
 
 void clear(){
     system("clear");
@@ -53,9 +54,9 @@ title("Welcome to BudgetC!");
 printf("Current Balance: %dPHP\n\n", balance);
 printf("[1]. Update Balance\n");
 printf("[2]. View History\n");
-printf("[3]. Logout\n");
+printf("[3]. Goal\n");
+printf("[4]. Logout\n");
 printf("What would you like to do?: ");
-
 }
 
 void update_balance_menu(){
@@ -75,6 +76,59 @@ void spend_menu(){
     title("SPEND BALANCE");
     printf("How much did you spend?: ");
 }
+
+void history_menu(){
+    title("HISTORY");
+    printf("[1]. All\n");
+    printf("[2]. Added\n");
+    printf("[3]. Spent\n");
+    printf("[4]. Go Back\n");
+    printf("What transactions would you like to see?: ");
+}
+
+
+void print_transact_date(char *date){
+    printf("\n\n");
+    printf("--------------\n");
+    printf("|| %s ||\n", date);
+    printf("--------------\n");
+}
+
+/* start of goal */
+
+void print_goal(){
+    Goal goal = get_goal();
+    strip(strlen(goal.name), goal.name);
+    strip(strlen(goal.date), goal.date);
+    float goal_progress = get_goal_progress(goal.investment, goal.amount);
+
+    printf("%s: %dPHP                     Invested Amount: %dPHP\n", goal.name, goal.amount, goal.investment);
+    printf("Target Date: %s            Progress: %.2f%%\n\n", goal.date, goal_progress);
+}
+void goal_menu(){
+    Goal goal = get_goal();
+    title("GOAL");
+    if(goal.name){
+        print_goal();
+    }
+    if(goal.name){
+        printf("[1]. Invest Money\n");
+        printf("[2]. Take Investment\n");
+        printf("[3]. Remove Goal\n");
+        printf("[4]. Go Back\n");
+    }
+    else if(!goal.name){
+        printf("Goal isn't set yet.\n\n");
+        
+        printf("[1]. Set Goal\n");
+        printf("[2]. Go Back\n");
+    }
+    else{
+        printf("Invalid goal_menu() mode.");
+    }
+}
+
+/* end of goal */
 
 void logout(){
     clear();
@@ -121,3 +175,54 @@ void print_transact_date(char *date){
     printf("|| %s ||\n", date);
     printf("--------------\n");
 }
+
+
+void invalid_goal_input(char *mode){
+    if(strcmp(mode, "amount") == 0){
+        printf("Invalid target amount.\nPlease enter a valid target amount.\n");
+    }
+    else if(strcmp(mode, "date") == 0){
+        printf("Invalid target date.\nPlease enter a valid target date\n");
+    }
+    
+    else{
+        printf("Invalid goal input mode\n");
+    }
+}
+
+void invalid_invest(char *mode){
+    if(strcmp(mode, "invalid") == 0){
+        printf("Please enter a valid amount.\n");
+    }
+    else if(strcmp(mode, "negative") == 0){
+        printf("You can't invest a negative amount.\n");
+    }
+    else if(strcmp(mode, "zero") == 0){
+        printf("You can't invest nothing.\n");
+    }
+    else if(strcmp(mode, "insufficient_bal") == 0){
+        printf("You don't have enough balance to invest that amount.\n");
+    }
+    else{
+        printf("Invalid investment mode");
+    }
+}
+
+void invalid_take_investment(char *mode){
+    if(strcmp(mode, "invalid") == 0){
+        printf("Please enter a valid number.\n");
+    }
+    else if(strcmp(mode, "negative") == 0){
+        printf("You can't take a negative amount.\n");
+    }
+    else if(strcmp(mode, "zero") == 0){
+        printf("Please can't take nothing.\n");
+    }
+    else if(strcmp(mode, "insufficient_investment") == 0){
+        printf("You don't have enough investment for that amount.\n");
+    }
+    else{
+        printf("Invalid investment take mode.\n");
+    }
+}
+
