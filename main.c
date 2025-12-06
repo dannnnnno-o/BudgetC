@@ -18,13 +18,13 @@
 #define COMMENT_SIZE 256
 
 int main(){
-clear();
-landing_page();
-loading(1, "Loading", 3);
-clear();
+// clear();
+// landing_page();
+// // loading(1, "Loading", 3);
+// clear();
 
 int current_balance;
-int is_logged_in = login();
+int is_logged_in = 1;
 
 
 char home;
@@ -184,7 +184,7 @@ while(1){
             case 2: //take money
             clear();
             title("TAKE INVESTMENT");
-            print_goal();
+            print_goal(); // causing an error
             if(!goal.investment){
                 printf("You have no investment to take back.\n\n");
             }
@@ -242,7 +242,7 @@ while(1){
 
         break;
        
-        case 4: home = 'y'; break;
+        case 4: goal_choice = 0; home = 'y'; break;
     }
     goal_choice = 0;
     if(home == 'y'){clear(); break;}
@@ -271,6 +271,7 @@ while(1){
 
         }
         else if(goal_choice == 2){   // return home
+            goal_choice = 0;
             break;
         }
     }
