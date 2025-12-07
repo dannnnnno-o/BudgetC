@@ -18,10 +18,10 @@
 #define COMMENT_SIZE 256
 
 int main(){
-// clear();
-// landing_page();
-// // loading(1, "Loading", 3);
-// clear();
+clear();
+landing_page();
+loading(1, "Loading", 3);
+clear();
 
 int current_balance;
 int is_logged_in = 1;
