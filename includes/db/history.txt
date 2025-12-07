@@ -35,3 +35,4 @@
 11-26-25 | - 12: to match current balance (prolly sa uncounted tryc yung 10, + 2 sa jeep rating mismatch)
 11-26-25 | + 1000: allowance for last week of november
 11-26-25 | - 35: to ucc
+12-7-25 | - 425: to match current balance
