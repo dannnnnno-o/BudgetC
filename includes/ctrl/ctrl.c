@@ -416,8 +416,15 @@ int confirm_goal_removal(Goal goal){
     return choice;
 }
 
-int invest(int bal){
+int invest(int bal, int curr_invest, int target){
 int investment = 0;
+int max_invest;
+if(curr_invest){
+    max_invest = target - curr_invest;
+}
+else{
+    max_invest = target;
+}
 title("Invest Money");
 if(!bal){
     printf("You don't have any balance to invest.\n\n");
@@ -452,6 +459,12 @@ while(1){
         clear();
         title("Invest Money");
         invalid_invest("insufficient_bal");
+        continue;
+    }
+    else if(investment > max_invest){
+        clear();
+        title("Invest Money");
+        invalid_invest("exceeds_goal");
         continue;
     }
     break;

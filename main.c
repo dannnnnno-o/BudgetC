@@ -160,7 +160,7 @@ while(1){
     switch(goal_choice){
         case 1: //invest money
             clear();
-            investment = invest(current_balance);
+            investment = invest(current_balance, goal.investment, goal.amount);
             if(!investment){break;}
             invest_confirm = confirm_investment(investment);
             if(invest_confirm){

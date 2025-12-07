@@ -186,6 +186,9 @@ void invalid_invest(char *mode){
     else if(strcmp(mode, "zero") == 0){
         printf("You can't invest nothing.\n");
     }
+    else if(strcmp(mode, "exceeds_goal") == 0){
+        printf("That exceeds the target amount.\n");
+    }
     else if(strcmp(mode, "insufficient_bal") == 0){
         printf("You don't have enough balance to invest that amount.\n");
     }
