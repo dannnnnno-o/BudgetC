@@ -107,26 +107,38 @@ void print_goal(){
     printf("Target Date: %s            Progress: %.2f%%\n\n", goal.date, goal_progress);
 }
 void goal_menu(){
+    int target_complete = 0;
     Goal goal = get_goal();
+
+    if(goal.investment == goal.amount){
+        target_complete = 1;
+    }
+
     title("GOAL");
-    if(goal.name){
-        print_goal();
-    }
-    if(goal.name){
-        printf("[1]. Invest Money\n");
-        printf("[2]. Take Investment\n");
-        printf("[3]. Remove Goal\n");
-        printf("[4]. Go Back\n");
-    }
-    else if(!goal.name){
+    if(!goal.name){
         printf("Goal isn't set yet.\n\n");
         
         printf("[1]. Set Goal\n");
         printf("[2]. Go Back\n");
     }
-    else{
-        printf("Invalid goal_menu() mode.");
+    if(!target_complete){
+        print_goal();
+        printf("[1]. Invest Money\n");
+        printf("[2]. Take Investment\n");
+        printf("[3]. Remove Goal\n");
+        printf("[4]. Go Back\n\n");
     }
+
+    else if(target_complete){
+        printf("NOTICE: Target amount has been reached.\n");
+        printf("NOTICE: You can now mark the goal as complete.\n\n");
+        print_goal();
+        printf("[1]. Complete Goal\n");
+        printf("[2]. Take Investment\n");
+        printf("[3]. Remove Goal\n");
+        printf("[4]. Go Back\n\n");
+    }
+
 }
 
 /* end of goal */

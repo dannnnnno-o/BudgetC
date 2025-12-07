@@ -425,6 +425,7 @@ if(curr_invest){
 else{
     max_invest = target;
 }
+
 title("Invest Money");
 if(!bal){
     printf("You don't have any balance to invest.\n\n");

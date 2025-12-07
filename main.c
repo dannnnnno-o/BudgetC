@@ -24,11 +24,10 @@ loading(1, "Loading", 3);
 clear();
 
 int current_balance;
-int is_logged_in = 1;
 
 
 char home;
-while(is_logged_in){
+while(1){
 home = 'n';
 current_balance = get_balance();
 
@@ -148,6 +147,7 @@ int investment = 0;
 int invest_confirm = 0;
 int take_invest = 0;
 int confirm_take;
+
 
 while(1){
     goal = get_goal();
