@@ -90,7 +90,9 @@ while(1){
         clear();
         printf("Process Cancelled.\n\n");
         }
-        loading(0, "Redirecting", 3);
+
+        printf("Press enter to proceed.\n\n");
+        wait_for_enter();
     }
     break;
 }
@@ -150,12 +152,11 @@ int take_invest = 0;
 int confirm_take;
 int goal_complete = 0;
 
-if(goal.name && goal.amount == goal.investment){
-    goal_complete = 1;
-}
+
 
 
 while(1){
+
 
     clear();
 
@@ -164,7 +165,14 @@ while(1){
         goal_choice = get_choice("goal");
     }
     switch(goal_choice){
-        case 1: //invest money || complete goal
+        case 1: //invest money || complete goal'
+        goal = get_goal();
+        if(goal.name && goal.amount == goal.investment){
+            goal_complete = 1;
+        }
+        else{
+            goal_complete = 0;
+        }
             clear();
             if(goal_complete){
                 int confirm_completion = confirm_goal_completion(goal);
@@ -203,9 +211,10 @@ while(1){
             else if(!invest_confirm){
                 clear();
                 loading(0, "Cancelling process", 3);
-                printf("\nProcess cancelled.\n\n");
+                clear();
+                printf("Process cancelled.\n\n");
             }
-            printf("Press enter to proceed. ");
+            printf("Press enter to proceed. \n\n");
             wait_for_enter();
             break; // end of invest money
         }
@@ -258,7 +267,7 @@ while(1){
                 printf("Press enter to continue.\n");
                 wait_for_enter();
                 clear();
-                break;
+                goal = get_goal();
             }
             else if(!goal_removal){
                 clear();
@@ -268,7 +277,6 @@ while(1){
                 printf("Press enter to continue.\n");
                 wait_for_enter();
                 clear();
-                break;
             }
 
         break;
@@ -278,10 +286,10 @@ while(1){
     goal_choice = 0;
     if(home == 'y'){clear(); break;}
 
-    if(!goal.amount){
+    if(!goal.name){
         clear();
-        goal_menu();
-        goal_choice = get_choice("no_goal");
+        goal_menu(); // we're printing 1-4 here
+        goal_choice = get_choice("no_goal"); // we're here
         clear();
         if(goal_choice == 1){
             title("Set Goal");
@@ -299,6 +307,7 @@ while(1){
             printf("Press enter to return.\n");
             wait_for_enter();
             goal_choice = 0;
+            goal = get_goal();
             continue;
 
         }

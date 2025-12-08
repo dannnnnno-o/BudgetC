@@ -1,4 +1,8 @@
 12-07-25 | + 1: Invested on goal "external pcie".
 12-07-25 | + 399: Invested on goal "external pcie".
 12-08-25 | + 400: Invested on goal "controller".
-12-08-25 | -- Goal "controller" Completed with target amount of 400. --
+12-08-25 | -- Goal "controller" Completed with target amount of 400. --12-08-25 | + 4000: Invested on goal "gpu".
+12-08-25 | -- Goal "gpu" Completed with target amount of 4000. --12-08-25 | + 2: Invested on goal "laptop".
+12-08-25 | -- Goal "laptop" Completed with target amount of 2. --12-08-25 | + 2: Invested on goal "2".
+12-08-25 | -- Goal "2" Completed with target amount of 2. --12-08-25 | + 2: Invested on goal "2".
+12-08-25 | -- Goal "2" Completed with target amount of 2. --

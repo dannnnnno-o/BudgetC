@@ -302,7 +302,7 @@ while(1){
 }
 }
 
-
+getchar();
 return choice;
 }
 
