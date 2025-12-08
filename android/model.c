@@ -9,7 +9,7 @@
 #include "../includes/goal.h"
 
 int get_balance(){
-    FILE *balance = fopen("includes/db/balance.txt", "r");
+    FILE *balance = fopen("../includes/db/balance.txt", "r");
     int bal;
     fscanf(balance, "%d", &bal);
     fclose(balance);
@@ -53,7 +53,7 @@ int update_account(char mode, int current_balance, int bal_buffer, char *comment
 }
 
 Goal get_goal(){
-    FILE *file = fopen("includes/db/goal.txt", "r");
+    FILE *file = fopen("../includes/db/goal.txt", "r");
 
     if (file == NULL) {
     perror("Error opening file");
