@@ -182,3 +182,16 @@ void update_investment(char *path, Goal goal, int x, char *bal_path, char *histo
     fclose(history_file);
     fclose(goal_history_file);
 }
+
+
+void complete_goal(char *goal_path, char *goal_history_path, Goal goal){
+    char *date = get_date();
+    strip(strlen(date), date);
+    strip(strlen(goal.name), goal.name);
+    
+    FILE *goal_history = fopen(goal_history_path, "a");
+    fprintf(goal_history, "%s | -- Goal \"%s\" Completed with target amount of %d. --", date, goal.name, goal.amount);
+
+    remove_goal(goal_path);
+    fclose(goal_history);
+}

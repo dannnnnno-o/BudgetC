@@ -19,9 +19,9 @@
 
 int main(){
 clear();
-landing_page();
-loading(1, "Loading", 3);
-clear();
+// landing_page();
+// loading(1, "Loading", 3);
+// clear();
 
 int current_balance;
 
@@ -139,7 +139,8 @@ while(1){
 break;
 
 case 3: //GOAL
-Goal goal;
+Goal goal = get_goal();
+
 int goal_choice;
 Goal goal_buf = {NULL, 0, NULL, 0};
 
@@ -147,30 +148,58 @@ int investment = 0;
 int invest_confirm = 0;
 int take_invest = 0;
 int confirm_take;
+int goal_complete = 0;
+
+if(goal.name && goal.amount == goal.investment){
+    goal_complete = 1;
+}
 
 
 while(1){
-    goal = get_goal();
+
     clear();
 
     goal_menu();
-    if(goal.amount){
+    if(goal.name){
         goal_choice = get_choice("goal");
     }
     switch(goal_choice){
-        case 1: //invest money
+        case 1: //invest money || complete goal
             clear();
-            investment = invest(current_balance, goal.investment, goal.amount);
-            if(!investment){break;}
-            invest_confirm = confirm_investment(investment);
-            if(invest_confirm){
-                clear();
-                loading(0, "Updating investment", 3);
-                clear();
-                update_investment(GOAL_PATH, goal, investment, BAL_PATH, HISTORY_PATH, GOAL_HISTORY, '+');
-                printf("\nInvestment Success!\n");
-                
+            if(goal_complete){
+                int confirm_completion = confirm_goal_completion(goal);
+                if(confirm_completion){
+                    clear();
+                    loading(0, "Updating goal", 3);
+                    clear();
+                    complete_goal(GOAL_PATH, GOAL_HISTORY, goal);
+                    printf("Goal completed!\n\n");
+                    printf("Press enter to proceed.\n\n");
+                    goal_complete = 0;
+                    goal = get_goal();
+                    wait_for_enter();
+                    clear();
+                }
+                else{
+                    clear();
+                    loading(0, "Cancelling Process", 3);
+                    clear();
+                    printf("Process cancelled.\n\n");
+                    printf("Press enter to proceed.\n\n");
+                    wait_for_enter();
+                }
             }
+            else if(!goal_complete){
+                investment = invest(current_balance, goal.investment, goal.amount);
+                if(!investment){break;}
+                invest_confirm = confirm_investment(investment);
+                if(invest_confirm){
+                    clear();
+                    loading(0, "Updating investment", 3);
+                    clear();
+                    update_investment(GOAL_PATH, goal, investment, BAL_PATH, HISTORY_PATH, GOAL_HISTORY, '+');
+                    printf("\nInvestment Success!\n");
+                }
             else if(!invest_confirm){
                 clear();
                 loading(0, "Cancelling process", 3);
@@ -179,7 +208,9 @@ while(1){
             printf("Press enter to proceed. ");
             wait_for_enter();
             break; // end of invest money
-
+        }
+       
+        break;
 
             case 2: //take money
             clear();
@@ -248,7 +279,8 @@ while(1){
     if(home == 'y'){clear(); break;}
 
     if(!goal.amount){
-
+        clear();
+        goal_menu();
         goal_choice = get_choice("no_goal");
         clear();
         if(goal_choice == 1){

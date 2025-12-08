@@ -200,10 +200,12 @@ if(strcmp(mode, "no_goal") == 0){
     }
 }
 
-/* end of goal menu */
-
 return choice;
 }
+
+/* end of goal menu */
+
+
 
 int get_update_value(char mode){
 int value = 0;
@@ -572,4 +574,39 @@ int confirm_take_investment(int to_take){
     }
 getchar();
 return choice;
+}
+
+int confirm_goal_completion(Goal goal){
+    int choice = 0;
+    char c;
+    while(1){
+        clear();
+        title("GOAL COMPLETION");
+        print_goal();
+        printf("\nAre you sure you want to mark this goal as complete? (y/n): ");
+
+        if(scanf(" %c", &c) != 1){
+            flush();
+            clear();
+            invalid_input();
+        }
+
+        else if(c == 'y' || c == 'Y'){
+            choice = 1;
+            break;
+        }
+
+        else if(c == 'n' || c == 'N'){
+            break;
+        }
+
+        else{
+            flush();
+            clear();
+            invalid_input();
+        }
+        continue;
+    }
+    getchar();
+    return choice;
 }

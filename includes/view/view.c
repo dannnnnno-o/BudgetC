@@ -110,7 +110,7 @@ void goal_menu(){
     int target_complete = 0;
     Goal goal = get_goal();
 
-    if(goal.investment == goal.amount){
+    if(goal.investment == goal.amount && goal.name){
         target_complete = 1;
     }
 
@@ -121,7 +121,7 @@ void goal_menu(){
         printf("[1]. Set Goal\n");
         printf("[2]. Go Back\n");
     }
-    if(!target_complete){
+    if(!target_complete && goal.name){
         print_goal();
         printf("[1]. Invest Money\n");
         printf("[2]. Take Investment\n");

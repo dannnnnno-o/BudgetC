@@ -28,4 +28,5 @@ int confirm_investment(int investment);
 
 int take_investment(int goal_investment);
 int confirm_take_investment(int to_take);
+int confirm_goal_completion(Goal goal);
 #endif
