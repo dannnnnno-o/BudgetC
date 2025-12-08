@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include "view.h"
+#include "../includes/view/view.h"
 #include "../includes/ctrl/ctrl.h"
 #include "../includes/model/model.h"
 #include "../includes/goal.h"
@@ -13,19 +13,6 @@
 void clear(){
     system("cls");
 }
-
-/* loading pages */
-
-void loading(int start, char *message, int intervals){
-    if(start){Sleep(1000);}
-    printf("%s", message);
-    for(int i = 0; i < intervals; i++){
-        Sleep(500);
-        printf(".");
-    }
-    Sleep(500);
-}
-
 
 /* UI */
 void title(char *title){

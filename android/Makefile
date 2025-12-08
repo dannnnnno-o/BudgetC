@@ -2,8 +2,8 @@ C = gcc
 CFLAGS = -Wall -g
 TARGET = main
 
-SRC = main.c includes/ctrl/ctrl.c view.c includes/model/model.c
-OBJ = $(SRC:.c=.o)
+SRC = main.c ../includes/ctrl/ctrl.c view.c ../includes/model/model.c
+OBJ = $(SRC:.c=.c)
 
 RM = rm -f
 
