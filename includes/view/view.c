@@ -106,6 +106,7 @@ void format_goal(Goal goal){
     char amount[256];   
     sprintf(amount, "%d", goal.amount);
     int name_amount_length = strlen(goal.name) + strlen(amount) + 5; // 5 for ": " and for PHP
+
     printf("%s: %sPHP", goal.name, amount);
     for(int i = name_amount_length; i < LIMIT; i++){
         printf(" ");
@@ -122,6 +123,7 @@ void format_goal(Goal goal){
 
 void print_goal(){
     Goal goal = get_goal();
+    printf("Current Balance: %dPHP\n\n", get_balance());
     format_goal(goal);
 }
 
