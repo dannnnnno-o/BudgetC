@@ -3,12 +3,13 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <Windows.h>
 #include <stddef.h>
 
-#include "../includes/ctrl/ctrl.h"
-#include "../includes/view/view.h"
-#include "../includes/model/model.h"
-#include "../includes/goal.h"
+#include "ctrl.h"
+#include "../view/view.h"
+#include "../model/model.h"
+#include "../goal.h"
 
 #define GOAL_PATH "../goal.h"
 
