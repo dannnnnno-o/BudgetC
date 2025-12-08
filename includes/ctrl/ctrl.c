@@ -383,6 +383,36 @@ char *get_goal_date(){
     strip(strlen(date), date);
     return date;
 }
+
+int confirm_set_goal(Goal goal){
+    int choice = 0;
+    char c;
+    while(1){
+        clear();
+        title("SET GOAL");
+        print_goal_buffer(goal);
+        printf("Are you sure you want to set this goal? (y/n): ");
+        if(scanf(" %c", &c) != 1){
+            flush();
+            invalid_input();
+            clear();
+            continue;
+        }
+
+        else if(c == 'n' || c == 'N'){break;}
+        else if(c == 'y' || c == 'Y'){choice = 1; break;}
+        else{
+            clear();
+            invalid_input();
+            print_goal();
+            continue;
+        }
+    }
+getchar();
+return choice;
+}
+
+
 float get_goal_progress(int investment, int amount){
     if(!investment){
         return 0;

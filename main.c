@@ -288,8 +288,8 @@ while(1){
 
     if(!goal.name){
         clear();
-        goal_menu(); // we're printing 1-4 here
-        goal_choice = get_choice("no_goal"); // we're here
+        goal_menu();
+        goal_choice = get_choice("no_goal");
         clear();
         if(goal_choice == 1){
             title("Set Goal");
@@ -297,18 +297,33 @@ while(1){
             goal_buf.amount = get_goal_amount();
             goal_buf.date = get_goal_date();
 
-            if(update_goal(GOAL_PATH, goal_buf)){
-                printf("Can't update goal\n");
+            int set_goal_confirmed = confirm_set_goal(goal_buf);
+
+            
+            if(set_goal_confirmed){
+                if(update_goal(GOAL_PATH, goal_buf)){
+                    printf("Can't update goal\n");
+                }
+                clear();
+                loading(0, "Updating goal", 3);
+                clear();
+                title("GOAL UPDATED!");
+                printf("Press enter to return.\n");
+                wait_for_enter();
+                goal_choice = 0;
+                goal = get_goal();
+                continue;
             }
-            printf("\n");
-            loading(0, "Updating goal", 3);
-            clear();
-            title("GOAL UPDATED!");
-            printf("Press enter to return.\n");
-            wait_for_enter();
-            goal_choice = 0;
-            goal = get_goal();
-            continue;
+            else{
+                clear();
+                loading(0, "Cancelling process", 3);
+                clear();
+                printf("Process cancelled.\n\n");
+                printf("Press enter to return.\n");
+                wait_for_enter();
+                goal_choice = 0;
+                continue;
+            }
 
         }
         else if(goal_choice == 2){   // return home

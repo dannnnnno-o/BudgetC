@@ -20,6 +20,7 @@ char *get_transact_date(char *transaction);
 char *get_goal_name();
 int get_goal_amount();
 char *get_goal_date();
+int confirm_set_goal(Goal goal);
 float get_goal_progress(int investment, int amount);
 
 int confirm_goal_removal(Goal goal);

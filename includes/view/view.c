@@ -106,6 +106,16 @@ void print_goal(){
     printf("%s: %dPHP                     Invested Amount: %dPHP\n", goal.name, goal.amount, goal.investment);
     printf("Target Date: %s            Progress: %.2f%%\n\n", goal.date, goal_progress);
 }
+
+void print_goal_buffer(Goal goal){
+    strip(strlen(goal.name), goal.name);
+    strip(strlen(goal.date), goal.date);
+    float goal_progress = get_goal_progress(goal.investment, goal.amount);
+
+    printf("%s: %dPHP                     Invested Amount: %dPHP\n", goal.name, goal.amount, goal.investment);
+    printf("Target Date: %s            Progress: %.2f%%\n\n", goal.date, goal_progress);
+}
+
 void goal_menu(){
     int target_complete = 0;
     Goal goal = get_goal();
