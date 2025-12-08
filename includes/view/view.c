@@ -117,9 +117,10 @@ void format_goal(Goal goal){
         printf(" ");
     }
     printf("Progress: %.2f%%\n\n", get_goal_progress(goal.investment, goal.amount)); */
-    printf("%s: %d\n", goal.name, goal.amount);
+    printf("Current Balance: %dPHP\n\n", get_balance());
+    printf("%s: %dPHP\n", goal.name, goal.amount);
     printf("Target Date: %s\n", goal.date);
-    printf("Invested amount: %d", goal.investment);
+    printf("Invested amount: %dPHP\n", goal.investment);
     printf("Progress: %.2f%%\n\n", get_goal_progress(goal.investment, goal.amount));
 }
 
