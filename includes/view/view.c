@@ -102,7 +102,7 @@ void format_goal(Goal goal){
     strip(strlen(goal.name), goal.name);
     strip(strlen(goal.date), goal.date);
 
-    char amount[256];   
+/*     char amount[256];   
     sprintf(amount, "%d", goal.amount);
     int name_amount_length = strlen(goal.name) + strlen(amount) + 5; // 5 for ": " and for PHP
     printf("%s: %sPHP", goal.name, amount);
@@ -116,6 +116,10 @@ void format_goal(Goal goal){
     for(int i = date_length; i < LIMIT; i++){
         printf(" ");
     }
+    printf("Progress: %.2f%%\n\n", get_goal_progress(goal.investment, goal.amount)); */
+    printf("%s: %d\n", goal.name, goal.amount);
+    printf("Target Date: %s\n", goal.date);
+    printf("Invested amount: %d", goal.investment);
     printf("Progress: %.2f%%\n\n", get_goal_progress(goal.investment, goal.amount));
 }
 
