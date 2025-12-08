@@ -604,8 +604,6 @@ int confirm_take_investment(int to_take){
 getchar();
 return choice;
 }
-<<<<<<< HEAD
-=======
 
 int confirm_goal_completion(Goal goal){
     int choice = 0;
@@ -641,4 +639,3 @@ int confirm_goal_completion(Goal goal){
     getchar();
     return choice;
 }
->>>>>>> main
