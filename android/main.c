@@ -19,7 +19,7 @@
 int main(){
 clear();
 // landing_page();
-// loading(1, "Loading", 3);
+loading(1, "Loading", 3);
 // clear();
 
 int current_balance;
@@ -78,14 +78,14 @@ while(1){
     if(bal_buffer){
         if(confirm(update_mode, bal_buffer, comment_choice, comment_buffer)){
             clear();
-            loading(0, "Updating your balance", 3);
+            // loading(0, "Updating your balance", 3);
             update_account(update_mode, current_balance, bal_buffer, comment_buffer, BAL_PATH, HISTORY_PATH);
             clear();
             printf("Balance updated!\n\n");
         }
         else{
         clear();
-        loading(0, "Cancelling process", 3);
+        // loading(0, "Cancelling process", 3);
         clear();
         printf("Process Cancelled.\n\n");
         }
@@ -106,7 +106,7 @@ while(1){
     history = get_choice("history");
     clear();
     if(history != 4){
-        loading(0, "Loading transactions", 2);
+        // loading(0, "Loading transactions", 2);
         clear();
     }
     switch(history){
@@ -133,7 +133,7 @@ while(1){
     printf("\n\nPress Enter to go back.\n");
     wait_for_enter();
     clear();
-    loading(0, "Redirecting", 2);
+    // loading(0, "Redirecting", 2);
     clear();
     continue;
 }
@@ -177,7 +177,7 @@ while(1){
                 int confirm_completion = confirm_goal_completion(goal);
                 if(confirm_completion){
                     clear();
-                    loading(0, "Updating goal", 3);
+                    // loading(0, "Updating goal", 3);
                     clear();
                     complete_goal(GOAL_PATH, GOAL_HISTORY, goal);
                     printf("Goal completed!\n\n");
@@ -189,7 +189,7 @@ while(1){
                 }
                 else{
                     clear();
-                    loading(0, "Cancelling Process", 3);
+                    // loading(0, "Cancelling Process", 3);
                     clear();
                     printf("Process cancelled.\n\n");
                     printf("Press enter to proceed.\n\n");
@@ -202,14 +202,14 @@ while(1){
                 invest_confirm = confirm_investment(investment);
                 if(invest_confirm){
                     clear();
-                    loading(0, "Updating investment", 3);
+                    // loading(0, "Updating investment", 3);
                     clear();
                     update_investment(GOAL_PATH, goal, investment, BAL_PATH, HISTORY_PATH, GOAL_HISTORY, '+');
                     printf("\nInvestment Success!\n");
                 }
             else if(!invest_confirm){
                 clear();
-                loading(0, "Cancelling process", 3);
+                // loading(0, "Cancelling process", 3);
                 clear();
                 printf("Process cancelled.\n\n");
             }
@@ -234,14 +234,14 @@ while(1){
                 confirm_take = confirm_take_investment(take_invest);
                 if(confirm_take){
                     clear();
-                    loading(0, "Updating goal", 3);
+                    // loading(0, "Updating goal", 3);
                     clear();
                     update_investment(GOAL_PATH, goal, take_invest, BAL_PATH, HISTORY_PATH, GOAL_HISTORY, '-');
                     printf("\n%d was added to your balance.\n", take_invest);    
                 }
                 else{
                     clear();
-                    loading(0, "Cancelling process", 3);
+                    // loading(0, "Cancelling process", 3);
                     clear();
                     printf("Process cancelled.\n\n");
                 }
@@ -260,7 +260,7 @@ while(1){
             if(goal_removal){
                 remove_goal(GOAL_PATH);
                 clear();
-                loading(0, "Removing goal", 3);
+                // loading(0, "Removing goal", 3);
                 clear();
                 printf("Goal removed.\n\n");
                 printf("Press enter to continue.\n");
@@ -270,7 +270,7 @@ while(1){
             }
             else if(!goal_removal){
                 clear();
-                loading(0, "Cancelling process", 3);
+                // loading(0, "Cancelling process", 3);
                 clear();
                 printf("Process cancelled.\n\n");
                 printf("Press enter to continue.\n");
@@ -304,7 +304,7 @@ while(1){
                     printf("Can't update goal\n");
                 }
                 clear();
-                loading(0, "Updating goal", 3);
+                // loading(0, "Updating goal", 3);
                 clear();
                 title("GOAL UPDATED!");
                 printf("Press enter to return.\n");
@@ -315,7 +315,7 @@ while(1){
             }
             else{
                 clear();
-                loading(0, "Cancelling process", 3);
+                // loading(0, "Cancelling process", 3);
                 clear();
                 printf("Process cancelled.\n\n");
                 printf("Press enter to return.\n");
@@ -336,7 +336,7 @@ while(1){
 
 case 4:
     clear();
-    loading(0, "Logging you out", 3);
+    // loading(0, "Logging you out", 3);
     // could ask for confirmation here
     logout(); 
     exit(0);
