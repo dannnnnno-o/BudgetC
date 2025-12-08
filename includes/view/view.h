@@ -17,9 +17,9 @@ void history_menu();
 void print_transact_date(char *date);
 
 void print_goal();
+void print_goal_buffer(Goal goal);
+void format_goal(Goal goal);
 void goal_menu();
-void set_goal_menu();
-void print_goal_progress(int investment, int amount);
 
 
 

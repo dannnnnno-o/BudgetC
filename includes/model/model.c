@@ -107,10 +107,14 @@ void view_transactions(char *mode, char *history_path){
         while(line != NULL){
             i++;
             curr_date = get_transact_date(buffer); // get curr_date
+            if(i == 1){
+                title(curr_date);
+                printf("%s", buffer + 11);
+            }
             line = fgets(buffer, sizeof(buffer), file); // get next_line
             next_date = get_transact_date(buffer); //get next_date
             if(strncmp(curr_date, next_date, 8) != 0){print_transact_date(next_date);} //print if curr != next
-            if(line != NULL){printf("%s", line + 10);} //print line if(line)
+            if(line != NULL){printf("%s", line + 11);} //print line if(line)
         }
         if(!i){
             printf("\nYou have not completed any transactions yet.\n");
@@ -176,4 +180,17 @@ void update_investment(char *path, Goal goal, int x, char *bal_path, char *histo
     fclose(balance);
     fclose(history_file);
     fclose(goal_history_file);
+}
+
+
+void complete_goal(char *goal_path, char *goal_history_path, Goal goal){
+    char *date = get_date();
+    strip(strlen(date), date);
+    strip(strlen(goal.name), goal.name);
+    
+    FILE *goal_history = fopen(goal_history_path, "a");
+    fprintf(goal_history, "%s | -- Goal \"%s\" Completed with target amount of %d. --", date, goal.name, goal.amount);
+
+    remove_goal(goal_path);
+    fclose(goal_history);
 }

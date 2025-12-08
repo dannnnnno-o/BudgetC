@@ -20,12 +20,14 @@ char *get_transact_date(char *transaction);
 char *get_goal_name();
 int get_goal_amount();
 char *get_goal_date();
+int confirm_set_goal(Goal goal);
 float get_goal_progress(int investment, int amount);
 
 int confirm_goal_removal(Goal goal);
-int invest(int bal);
+int invest(int bal, int curr_invest, int target);
 int confirm_investment(int investment);
 
 int take_investment(int goal_investment);
 int confirm_take_investment(int to_take);
+int confirm_goal_completion(Goal goal);
 #endif

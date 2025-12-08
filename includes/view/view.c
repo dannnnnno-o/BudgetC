@@ -8,6 +8,8 @@
 #include "../model/model.h"
 #include "../goal.h"
 
+#define LIMIT 40
+
 void clear(){
     system("clear");
 }
@@ -96,36 +98,69 @@ void print_transact_date(char *date){
 
 /* start of goal */
 
-void print_goal(){
-    Goal goal = get_goal();
+void format_goal(Goal goal){
     strip(strlen(goal.name), goal.name);
     strip(strlen(goal.date), goal.date);
-    float goal_progress = get_goal_progress(goal.investment, goal.amount);
 
-    printf("%s: %dPHP                     Invested Amount: %dPHP\n", goal.name, goal.amount, goal.investment);
-    printf("Target Date: %s            Progress: %.2f%%\n\n", goal.date, goal_progress);
+    char amount[256];   
+    sprintf(amount, "%d", goal.amount);
+    int name_amount_length = strlen(goal.name) + strlen(amount) + 5; // 5 for ": " and for PHP
+    printf("%s: %sPHP", goal.name, amount);
+    for(int i = name_amount_length; i < LIMIT; i++){
+        printf(" ");
+    }
+    printf("Invested amount: %dPHP\n", goal.investment);
+    
+    printf("Target Date: %s", goal.date);
+    int date_length = strlen(goal.date) + 13;
+    for(int i = date_length; i < LIMIT; i++){
+        printf(" ");
+    }
+    printf("Progress: %.2f%%\n\n", get_goal_progress(goal.investment, goal.amount));
 }
-void goal_menu(){
+
+void print_goal(){
     Goal goal = get_goal();
+    format_goal(goal);
+}
+
+void print_goal_buffer(Goal goal){
+    format_goal(goal);
+}
+
+void goal_menu(){
+    int target_complete = 0;
+    Goal goal = get_goal();
+
+    if(goal.investment == goal.amount && goal.name){
+        target_complete = 1;
+    }
+
     title("GOAL");
-    if(goal.name){
-        print_goal();
-    }
-    if(goal.name){
-        printf("[1]. Invest Money\n");
-        printf("[2]. Take Investment\n");
-        printf("[3]. Remove Goal\n");
-        printf("[4]. Go Back\n");
-    }
-    else if(!goal.name){
+    if(!goal.name){
         printf("Goal isn't set yet.\n\n");
         
         printf("[1]. Set Goal\n");
         printf("[2]. Go Back\n");
     }
-    else{
-        printf("Invalid goal_menu() mode.");
+    if(!target_complete && goal.name){
+        print_goal();
+        printf("[1]. Invest Money\n");
+        printf("[2]. Take Investment\n");
+        printf("[3]. Remove Goal\n");
+        printf("[4]. Go Back\n\n");
     }
+
+    else if(target_complete){
+        printf("NOTICE: Target amount has been reached.\n");
+        printf("NOTICE: You can now mark the goal as complete.\n\n");
+        print_goal();
+        printf("[1]. Complete Goal\n");
+        printf("[2]. Take Investment\n");
+        printf("[3]. Remove Goal\n");
+        printf("[4]. Go Back\n\n");
+    }
+
 }
 
 /* end of goal */
@@ -183,6 +218,9 @@ void invalid_invest(char *mode){
     }
     else if(strcmp(mode, "zero") == 0){
         printf("You can't invest nothing.\n");
+    }
+    else if(strcmp(mode, "exceeds_goal") == 0){
+        printf("That exceeds the target amount.\n");
     }
     else if(strcmp(mode, "insufficient_bal") == 0){
         printf("You don't have enough balance to invest that amount.\n");

@@ -199,10 +199,12 @@ if(strcmp(mode, "no_goal") == 0){
     }
 }
 
-/* end of goal menu */
-
 return choice;
 }
+
+/* end of goal menu */
+
+
 
 int get_update_value(char mode){
 int value = 0;
@@ -299,7 +301,7 @@ while(1){
 }
 }
 
-
+getchar();
 return choice;
 }
 
@@ -380,6 +382,36 @@ char *get_goal_date(){
     strip(strlen(date), date);
     return date;
 }
+
+int confirm_set_goal(Goal goal){
+    int choice = 0;
+    char c;
+    while(1){
+        clear();
+        title("SET GOAL");
+        print_goal_buffer(goal);
+        printf("Are you sure you want to set this goal? (y/n): ");
+        if(scanf(" %c", &c) != 1){
+            flush();
+            invalid_input();
+            clear();
+            continue;
+        }
+
+        else if(c == 'n' || c == 'N'){break;}
+        else if(c == 'y' || c == 'Y'){choice = 1; break;}
+        else{
+            clear();
+            invalid_input();
+            print_goal();
+            continue;
+        }
+    }
+getchar();
+return choice;
+}
+
+
 float get_goal_progress(int investment, int amount){
     if(!investment){
         return 0;
@@ -415,8 +447,16 @@ int confirm_goal_removal(Goal goal){
     return choice;
 }
 
-int invest(int bal){
+int invest(int bal, int curr_invest, int target){
 int investment = 0;
+int max_invest;
+if(curr_invest){
+    max_invest = target - curr_invest;
+}
+else{
+    max_invest = target;
+}
+
 title("Invest Money");
 if(!bal){
     printf("You don't have any balance to invest.\n\n");
@@ -451,6 +491,12 @@ while(1){
         clear();
         title("Invest Money");
         invalid_invest("insufficient_bal");
+        continue;
+    }
+    else if(investment > max_invest){
+        clear();
+        title("Invest Money");
+        invalid_invest("exceeds_goal");
         continue;
     }
     break;
@@ -558,3 +604,41 @@ int confirm_take_investment(int to_take){
 getchar();
 return choice;
 }
+<<<<<<< HEAD
+=======
+
+int confirm_goal_completion(Goal goal){
+    int choice = 0;
+    char c;
+    while(1){
+        clear();
+        title("GOAL COMPLETION");
+        print_goal();
+        printf("\nAre you sure you want to mark this goal as complete? (y/n): ");
+
+        if(scanf(" %c", &c) != 1){
+            flush();
+            clear();
+            invalid_input();
+        }
+
+        else if(c == 'y' || c == 'Y'){
+            choice = 1;
+            break;
+        }
+
+        else if(c == 'n' || c == 'N'){
+            break;
+        }
+
+        else{
+            flush();
+            clear();
+            invalid_input();
+        }
+        continue;
+    }
+    getchar();
+    return choice;
+}
+>>>>>>> main
