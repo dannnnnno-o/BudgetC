@@ -9,6 +9,8 @@
 #include "../model/model.h"
 #include "../goal.h"
 
+#define LIMIT 40
+
 void clear(){
     system("cls");
 }
@@ -97,14 +99,36 @@ void print_transact_date(char *date){
 
 /* start of goal */
 
+void format_goal(Goal goal){
+    strip(strlen(goal.name), goal.name);
+    strip(strlen(goal.date), goal.date);
+
+    char amount[256];   
+    sprintf(amount, "%d", goal.amount);
+    int name_amount_length = strlen(goal.name) + strlen(amount) + 5; // 5 for ": " and for PHP
+    printf("%s: %sPHP", goal.name, amount);
+    for(int i = name_amount_length; i < LIMIT; i++){
+        printf(" ");
+    }
+    printf("Invested amount: %dPHP\n", goal.investment);
+    
+    printf("Target Date: %s", goal.date);
+    int date_length = strlen(goal.date) + 13;
+    for(int i = date_length; i < LIMIT; i++){
+        printf(" ");
+    }
+    printf("Progress: %.2f%%\n\n", get_goal_progress(goal.investment, goal.amount));
+}
+
 void print_goal(){
     Goal goal = get_goal();
     strip(strlen(goal.name), goal.name);
     strip(strlen(goal.date), goal.date);
-    float goal_progress = get_goal_progress(goal.investment, goal.amount);
+    // float goal_progress = get_goal_progress(goal.investment, goal.amount);
 
-    printf("%s: %dPHP                     Invested Amount: %dPHP\n", goal.name, goal.amount, goal.investment);
-    printf("Target Date: %s            Progress: %.2f%%\n\n", goal.date, goal_progress);
+    // printf("%s: %dPHP                     Invested Amount: %dPHP\n", goal.name, goal.amount, goal.investment);
+    // printf("Target Date: %s            Progress: %.2f%%\n\n", goal.date, goal_progress);
+    format_goal(goal);
 }
 
 void print_goal_buffer(Goal goal){
