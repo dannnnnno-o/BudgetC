@@ -2,7 +2,7 @@ C = gcc
 CFLAGS = -Wall -g
 TARGET = main
 
-SRC = main.c ../includes/ctrl/ctrl.c view.c ../includes/model/model.c
+SRC = main.c ctrl.c view.c model.c
 OBJ = $(SRC:.c=.c)
 
 RM = rm -f
