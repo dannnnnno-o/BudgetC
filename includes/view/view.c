@@ -122,22 +122,11 @@ void format_goal(Goal goal){
 
 void print_goal(){
     Goal goal = get_goal();
-    strip(strlen(goal.name), goal.name);
-    strip(strlen(goal.date), goal.date);
-    // float goal_progress = get_goal_progress(goal.investment, goal.amount);
-
-    // printf("%s: %dPHP                     Invested Amount: %dPHP\n", goal.name, goal.amount, goal.investment);
-    // printf("Target Date: %s            Progress: %.2f%%\n\n", goal.date, goal_progress);
     format_goal(goal);
 }
 
 void print_goal_buffer(Goal goal){
-    strip(strlen(goal.name), goal.name);
-    strip(strlen(goal.date), goal.date);
-    float goal_progress = get_goal_progress(goal.investment, goal.amount);
-
-    printf("%s: %dPHP                     Invested Amount: %dPHP\n", goal.name, goal.amount, goal.investment);
-    printf("Target Date: %s            Progress: %.2f%%\n\n", goal.date, goal_progress);
+    format_goal(goal);
 }
 
 void goal_menu(){
