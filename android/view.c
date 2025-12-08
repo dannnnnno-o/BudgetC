@@ -11,7 +11,7 @@
 #define LIMIT 40
 
 void clear(){
-    system("cls");
+    system("clear");
 }
 
 /* UI */
