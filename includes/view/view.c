@@ -85,7 +85,8 @@ void history_menu(){
     printf("[1]. All\n");
     printf("[2]. Added\n");
     printf("[3]. Spent\n");
-    printf("[4]. Go Back\n");
+    printf("[4]. Goal\n");
+    printf("[5]. Go Back\n");
     printf("What transactions would you like to see?: ");
 }
 

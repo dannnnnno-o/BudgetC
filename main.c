@@ -106,7 +106,7 @@ while(1){
     history_menu();
     history = get_choice("history");
     clear();
-    if(history != 4){
+    if(history != 5){
         loading(0, "Loading transactions", 2);
         clear();
     }
@@ -123,7 +123,12 @@ while(1){
             title("SPENT BALANCE");
             view_transactions("spent", HISTORY_PATH); 
             break;
-        case 4: home = 'y'; break;
+
+        case 4: title("GOAL HISTORY");
+        view_goal_history(GOAL_HISTORY);
+        break;
+
+        case 5: home = 'y'; break;
     }
 
     if(home == 'y'){
@@ -259,7 +264,7 @@ while(1){
             print_goal();
             int goal_removal = confirm_goal_removal(goal);
             if(goal_removal){
-                remove_goal(GOAL_PATH);
+                remove_goal(GOAL_PATH, GOAL_HISTORY);
                 clear();
                 loading(0, "Removing goal", 3);
                 clear();
@@ -301,7 +306,7 @@ while(1){
 
             
             if(set_goal_confirmed){
-                if(update_goal(GOAL_PATH, goal_buf)){
+                if(update_goal(GOAL_PATH, GOAL_HISTORY, goal_buf)){
                     printf("Can't update goal\n");
                 }
                 clear();

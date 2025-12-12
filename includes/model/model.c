@@ -78,23 +78,34 @@ Goal get_goal(){
     return goal;
 }
 
-int update_goal(char *path, Goal goal){
+int update_goal(char *path, char *goal_history_path, Goal goal){
     FILE *file = fopen(path, "w");
-        if (fprintf(file, "%s\n%d\n%s", goal.name, goal.amount, goal.date ) < 0) {
-        perror("Error writing to file");
-        fclose(file);
-        return EXIT_FAILURE;
-    }
+    FILE *goal_history = fopen(goal_history_path, "a");
+    char *date = get_date();
+    fprintf(file, "%s\n%d\n%s", goal.name, goal.amount, goal.date);
+    fprintf(goal_history, "%s |  GOAL \"%s\" ADDED. TARGET AMOUNT: %d\n", date, goal.name, goal.amount);
+
     fclose(file);
+    fclose(goal_history);
     return 0;
 }
 
-void remove_goal(char *path){
-    FILE *file = fopen(path, "w");
+
+void remove_goal(char *path, char *goal_history_path){
+    char *date = get_date();
+    char buffer[256];
+    FILE *file = fopen(path, "r");
+    FILE *goal_history = fopen(goal_history_path, "a");
+    char *name = fgets(buffer, sizeof(buffer), file);
+    strip(strlen(name), name);
+    fprintf(goal_history, "%s |  GOAL \"%s\" REMOVED.\n", date, name);
     fclose(file);
+    
+    FILE *goal_rm = fopen(path, "w");
+    fclose(goal_history);
+    fclose(goal_rm);
 }
-
-
+    
 void view_transactions(char *mode, char *history_path){
     FILE *file = fopen(history_path, "r");
     char buffer[256];
@@ -190,8 +201,22 @@ void complete_goal(char *goal_path, char *goal_history_path, Goal goal){
     strip(strlen(goal.name), goal.name);
     
     FILE *goal_history = fopen(goal_history_path, "a");
-    fprintf(goal_history, "%s | -- Goal \"%s\" Completed with target amount of %d. --", date, goal.name, goal.amount);
+    fprintf(goal_history, "%s | -- GOAL \"%s\" COMPLETED. TARGET AMOUNT: %d. --", date, goal.name, goal.amount);
 
-    remove_goal(goal_path);
+    remove_goal(goal_path, goal_history_path);
     fclose(goal_history);
+}
+
+
+void view_goal_history(char *history_path){
+    FILE *file = fopen(history_path, "r");
+    char buffer[256];
+    int i = 0;
+    while(fgets(buffer, sizeof(buffer), file) != NULL){
+        i++;
+        printf("%s", buffer);
+    }
+    if(!i){
+        printf("No transactions yet.\n");
+    }
 }

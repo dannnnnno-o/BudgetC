@@ -5,10 +5,10 @@
 #include <unistd.h>
 #include <stddef.h>
 
-#include "../includes/ctrl/ctrl.h"
-#include "../includes/view/view.h"
-#include "../includes/model/model.h"
-#include "../includes/goal.h"
+#include "ctrl.h"
+#include "../view/view.h"
+#include "../model/model.h"
+#include "../goal.h"
 
 #define GOAL_PATH "../goal.h"
 
@@ -150,9 +150,9 @@ while(1){
 /* history */
 if(strcmp(mode, "history") == 0){
 while(1){
-    if(scanf("%d", &choice) != 1 || (choice <= 0 || choice > 4)){
+    if(scanf("%d", &choice) != 1 || (choice <= 0 || choice > 5)){
         clear();
-        invalid_choice(4);
+        invalid_choice(5);
         history_menu();
         flush();
         continue;
