@@ -146,7 +146,7 @@ while(1){
 break;
 
 case 3: //GOAL
-Goal goal = get_goal();
+Goal goal = {NULL};
 
 int goal_choice;
 Goal goal_buf = {NULL, 0, NULL, 0};
@@ -161,7 +161,7 @@ int goal_complete = 0;
 
 
 while(1){
-
+goal = get_goal();
 
     clear();
 
@@ -243,7 +243,7 @@ while(1){
                     loading(0, "Updating goal", 3);
                     clear();
                     update_investment(GOAL_PATH, goal, take_invest, BAL_PATH, HISTORY_PATH, GOAL_HISTORY, '-');
-                    printf("\n%d was added to your balance.\n", take_invest);    
+                    printf("\n%dPHP was added to your balance.\n", take_invest);    
                 }
                 else{
                     clear();
@@ -259,31 +259,32 @@ while(1){
             
 
         case 3: // remove goal
-            clear();
-            title("Remove Goal");
-            print_goal();
+        clear();
+        title("Remove Goal");
+        print_goal();
+        if(goal.investment && goal.investment != 0){
+            remove_goal_error(goal.investment);
+        }
+        else{
             int goal_removal = confirm_goal_removal(goal);
             if(goal_removal){
-                remove_goal(GOAL_PATH, GOAL_HISTORY);
+                remove_goal(GOAL_PATH, GOAL_HISTORY, goal.investment, 0);
                 clear();
                 loading(0, "Removing goal", 3);
                 clear();
                 printf("Goal removed.\n\n");
-                printf("Press enter to continue.\n");
-                wait_for_enter();
-                clear();
-                goal = get_goal();
             }
+            
             else if(!goal_removal){
                 clear();
                 loading(0, "Cancelling process", 3);
                 clear();
                 printf("Process cancelled.\n\n");
-                printf("Press enter to continue.\n");
-                wait_for_enter();
-                clear();
             }
-
+        }
+            printf("Press enter to continue.\n");
+            wait_for_enter();
+            clear();
         break;
        
         case 4: goal_choice = 0; home = 'y'; break;
