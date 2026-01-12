@@ -91,19 +91,26 @@ int update_goal(char *path, char *goal_history_path, Goal goal){
 }
 
 
-void remove_goal(char *path, char *goal_history_path){
-    char *date = get_date();
-    char buffer[256];
-    FILE *file = fopen(path, "r");
-    FILE *goal_history = fopen(goal_history_path, "a");
-    char *name = fgets(buffer, sizeof(buffer), file);
-    strip(strlen(name), name);
-    fprintf(goal_history, "%s |  GOAL \"%s\" REMOVED.\n", date, name);
-    fclose(file);
-    
-    FILE *goal_rm = fopen(path, "w");
-    fclose(goal_history);
-    fclose(goal_rm);
+void remove_goal(char *path, char *goal_history_path, int investment, int isComplete){
+    if(investment){
+        remove_goal_error(investment);
+    }
+    else{
+        char *date = get_date();
+        char buffer[256];
+        FILE *file = fopen(path, "r");
+        FILE *goal_history = fopen(goal_history_path, "a");
+        char *name = fgets(buffer, sizeof(buffer), file);
+        strip(strlen(name), name);
+        if(!isComplete){
+            fprintf(goal_history, "%s |  GOAL \"%s\" REMOVED.\n", date, name);
+        }
+        
+        FILE *goal_rm = fopen(path, "w");
+        fclose(file);
+        fclose(goal_history);
+        fclose(goal_rm);
+    }
 }
     
 void view_transactions(char *mode, char *history_path){
@@ -203,7 +210,7 @@ void complete_goal(char *goal_path, char *goal_history_path, Goal goal){
     FILE *goal_history = fopen(goal_history_path, "a");
     fprintf(goal_history, "%s | -- GOAL \"%s\" COMPLETED. TARGET AMOUNT: %d. --", date, goal.name, goal.amount);
 
-    remove_goal(goal_path, goal_history_path);
+    remove_goal(goal_path, goal_history_path, 0, 1);
     fclose(goal_history);
 }
 

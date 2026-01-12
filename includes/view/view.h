@@ -34,4 +34,6 @@ void invalid_goal_input(char *mode);
 void invalid_invest(char *mode);
 void invalid_take_investment(char *mode);
 
+void remove_goal_error(int amount);
+
 #endif
