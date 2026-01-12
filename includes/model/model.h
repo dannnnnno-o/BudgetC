@@ -19,4 +19,5 @@ int update_account(char mode, int current_balance, int bal_buffer, char *comment
 void view_transactions(char *mode, char *history_path);
 void view_goal_history(char *history_path);
 
+
 #endif

@@ -258,3 +258,4 @@ void remove_goal_error(int amount){
     printf("Take your investment first before removing the goal.\n\n");
 }
 
+
