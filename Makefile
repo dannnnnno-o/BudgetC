@@ -14,10 +14,10 @@ else
 endif
 
 $(TARGET)$(TARGET_EXT): $(OBJ)
-	$(CC) $(CFLAGS) -o $(TARGET)$(TARGET_EXT) $(OBJ)
+	$(CC) $(CFLAGS) -o $(TARGET)$(TARGET_EXT) $(SRC)
 
 run: $(TARGET)$(TARGET_EXT)
 	./$(TARGET)$(TARGET_EXT)
 
 clean:
-	$(RM) $(OBJ) $(TARGET)$(TARGET_EXT)
+	$(RM) $(SRC) $(TARGET)$(TARGET_EXT)
