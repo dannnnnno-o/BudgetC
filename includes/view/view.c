@@ -144,7 +144,7 @@ void format_goal(Goal goal){
     printf("Progress: %.2f%%\n\n", goal_progress);
 #elifdef __unix__
     printf("%s: %sPHP\n", goal.name, amount);
-    printf("Invested Amount: %sPHP\n", goal.investment);
+    printf("Invested Amount: %dPHP\n", goal.investment);
     printf("Target Date: %s\n", goal.date);
     printf("Progress: %.2f%%\n", goal_progress);
 #endif
