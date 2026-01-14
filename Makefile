@@ -1,15 +1,23 @@
 CC = gcc
 CFLAGS = -Wall -g
 TARGET = main
-SRC = main.c includes\ctrl\ctrl.c includes\view\view.c includes\model\model.c
+
+SRC = main.c includes/ctrl/ctrl.c includes/view/view.c includes/model/model.c
 OBJ = $(SRC:.c=.o)
-RM = del /Q
 
-$(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ)
+ifeq ($(OS),Windows_NT)
+    RM = del /Q
+    TARGET_EXT = .exe
+else
+    RM = rm -f
+    TARGET_EXT =
+endif
 
-run: $(TARGET)
-	./$(TARGET)
+$(TARGET)$(TARGET_EXT): $(OBJ)
+	$(CC) $(CFLAGS) -o $(TARGET)$(TARGET_EXT) $(OBJ)
+
+run: $(TARGET)$(TARGET_EXT)
+	./$(TARGET)$(TARGET_EXT)
 
 clean:
-	$(RM) $(OBJ) $(TARGET).exe
+	$(RM) $(OBJ) $(TARGET)$(TARGET_EXT)

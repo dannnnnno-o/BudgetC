@@ -3,7 +3,6 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include <Windows.h>
 #include <stddef.h> // for size_t
 
 #include "includes/model/model.h"
@@ -19,9 +18,9 @@
 
 int main(){
 clear();
-// landing_page();
-// loading(1, "Loading", 3);
-// clear();
+landing_page();
+loading(1, "Loading", 3);
+clear();
 
 int current_balance;
 

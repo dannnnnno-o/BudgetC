@@ -3,7 +3,11 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include <Windows.h>
+
+#ifdef _WIN32
+    #include <Windows.h>
+#endif
+
 #include "view.h"
 #include "../ctrl/ctrl.h"
 #include "../model/model.h"
@@ -12,12 +16,18 @@
 #define LIMIT 40
 
 void clear(){
+#ifdef _WIN32
     system("cls");
+
+#elifdef __unix__
+    system("clear");
+#endif
 }
 
 /* loading pages */
 
 void loading(int start, char *message, int intervals){
+#ifdef _WIN32
     if(start){Sleep(1000);}
     printf("%s", message);
     for(int i = 0; i < intervals; i++){
@@ -25,6 +35,17 @@ void loading(int start, char *message, int intervals){
         printf(".");
     }
     Sleep(500);
+
+#elifdef __unix__
+    if(start){usleep(1000000);}
+    printf("%s", message);
+    for(int i = 0; i < intervals; i++){
+        usleep(500000);
+        printf(".");
+        fflush(stdout);
+    }
+    usleep(500000);
+#endif
 }
 
 
