@@ -128,19 +128,26 @@ void format_goal(Goal goal){
     char amount[256];   
     sprintf(amount, "%d", goal.amount);
     int name_amount_length = strlen(goal.name) + strlen(amount) + 5; // 5 for ": " and for PHP
-
+    float goal_progress = get_goal_progress(goal.investment, goal.amount);
+#ifdef _WIN32
     printf("%s: %sPHP", goal.name, amount);
     for(int i = name_amount_length; i < LIMIT; i++){
         printf(" ");
     }
     printf("Invested amount: %dPHP\n", goal.investment);
-    
+
     printf("Target Date: %s", goal.date);
     int date_length = strlen(goal.date) + 13;
     for(int i = date_length; i < LIMIT; i++){
         printf(" ");
     }
-    printf("Progress: %.2f%%\n\n", get_goal_progress(goal.investment, goal.amount));
+    printf("Progress: %.2f%%\n\n", goal_progress);
+#elifdef __unix__
+    printf("%s: %sPHP", goal.name, amount);
+    printf("Invested Amount: %sPHP", goal.investment);
+    printf("Target Date: %s", goal.date);
+    printf("Progress: %.2f%%", goal_progress);
+#endif
 }
 
 void print_goal(){
