@@ -2,16 +2,18 @@ CC = gcc
 CFLAGS = -Wall -g
 TARGET = main
 
-SRC = main.c includes/ctrl/ctrl.c includes/view/view.c includes/model/model.c
-OBJ = $(SRC:.c=.o)
 
 ifeq ($(OS),Windows_NT)
+    SRC = main.c includes\ctrl\ctrl.c includes\view\view.c includes\model\model.c
     RM = del /Q
     TARGET_EXT = .exe
 else
+    SRC = main.c includes/ctrl/ctrl.c includes/view/view.c includes/model/model.c
     RM = rm -f
     TARGET_EXT =
 endif
+
+OBJ = $(SRC:.c=.o)
 
 $(TARGET)$(TARGET_EXT): $(OBJ)
 	$(CC) $(CFLAGS) -o $(TARGET)$(TARGET_EXT) $(SRC)
